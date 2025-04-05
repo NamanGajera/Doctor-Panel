@@ -86,6 +86,7 @@ class CustomTextField extends StatelessWidget {
   final String? counterText;
   final Color? fillColor;
   final bool? filled;
+  final bool? isBorderNone;
   final EdgeInsets? contentPadding;
   final TextInputType? keyboardType;
   final void Function(String)? onChanged;
@@ -100,6 +101,7 @@ class CustomTextField extends StatelessWidget {
     this.hintStyle,
     this.prefixIcon,
     this.suffixIcon,
+    this.isBorderNone,
     this.obscureText = false,
     this.borderColor = Colors.grey,
     this.focusedBorderColor = primaryBlueColor,
@@ -159,10 +161,12 @@ class CustomTextField extends StatelessWidget {
                     size: suffixIconSize,
                   ).onTap(onTapSuffixIcon!)
                 : null,
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: borderColor, width: borderWidth),
-              borderRadius: BorderRadius.circular(8),
-            ),
+            border: isBorderNone == true
+                ? InputBorder.none
+                : OutlineInputBorder(
+                    borderSide: BorderSide(color: borderColor, width: borderWidth),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: focusedBorderColor, width: borderWidth),
               borderRadius: BorderRadius.circular(8),

@@ -1,6 +1,6 @@
 {
-    "name": "doctor_panel",
-    "short_name": "doctor_panel",
+    "name": "Doctor House",
+    "short_name": "doctor.dh",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

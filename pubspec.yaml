@@ -39,6 +39,7 @@ dependencies:
 
   # UI Components
   dropdown_button2: ^2.3.9
+  logger: ^2.5.0
 
 dev_dependencies:
   flutter_test:
@@ -49,8 +50,8 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images
-    - assets/svg
+    - assets/images/
+    - assets/svg/
 
   fonts:
     - family: Inter

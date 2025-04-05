@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/di/dependency_injection.dart';
 import 'core/services/shared_prefs_helper.dart';
@@ -10,7 +9,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPrefsHelper.init();
   await setupDependencies();
-
   runApp(const MyApp());
 }
 
@@ -20,18 +18,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: MultiBlocProvider(
-        providers: [],
-        child: MediaQuery(
-          data: MediaQuery.of(context).copyWith(textScaler: TextScaler.noScaling),
-          child: MaterialApp.router(
-            title: 'Doctor House',
-            debugShowCheckedModeBanner: false,
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            themeMode: ThemeMode.light,
-            routerConfig: appRouter,
-          ),
+      child: MediaQuery(
+        data: MediaQuery.of(context).copyWith(textScaler: TextScaler.noScaling),
+        child: MaterialApp.router(
+          title: 'Doctor House',
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: ThemeMode.light,
+          routerConfig: appRouter,
         ),
       ),
     );
