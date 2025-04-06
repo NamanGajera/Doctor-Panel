@@ -23,3 +23,25 @@ enum DateFormatType {
   timeToTwelveHour, // Converts 24-hour time to 12-hour time
   timeToTwentyFourHour, // Converts 12-hour time to 24-hour time
 }
+
+// Enum to track which text theme style to use
+enum TextThemeStyle {
+  headlineLarge,
+  headlineMedium,
+  headlineSmall,
+  titleLarge,
+  titleMedium,
+  titleSmall,
+  bodyLarge,
+  bodyMedium,
+  bodySmall,
+  labelLarge,
+  labelMedium,
+  labelSmall,
+}
+
+enum DatePickerModeEnum {
+  date,
+  time,
+  dateTime,
+}

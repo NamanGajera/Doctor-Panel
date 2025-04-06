@@ -2,7 +2,10 @@ import 'package:doctor_panel/core/extension/widget_extension.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
+import '../../utils/enums.dart';
 import 'colors.dart';
 
 // COMMON UI COMPONENTS
@@ -94,6 +97,15 @@ class CustomTextField extends StatelessWidget {
   final int? maxLines;
   final int? maxLength;
   final void Function()? onTapSuffixIcon;
+  final List<TextInputFormatter>? inputFormatters;
+  final bool readOnly;
+  final void Function()? onTap;
+
+  // properties for title functionality
+  final String? title;
+  final bool isRequired;
+  final TextStyle? titleStyle;
+  final bool showTitle;
 
   const CustomTextField({
     required this.controller,
@@ -103,6 +115,8 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.isBorderNone,
     this.obscureText = false,
+    this.readOnly = false,
+    this.onTap,
     this.borderColor = Colors.grey,
     this.focusedBorderColor = primaryBlueColor,
     this.disabledBorderColor = primaryBlueColor,
@@ -110,6 +124,7 @@ class CustomTextField extends StatelessWidget {
     this.cursorColor = primaryBlueColor,
     this.borderWidth = 1.0,
     this.customDecoration,
+    this.inputFormatters,
     this.validator,
     this.prefixIconColor,
     this.prefixIconSize,
@@ -127,15 +142,24 @@ class CustomTextField extends StatelessWidget {
     this.maxLines,
     this.minLines,
     this.textStyle,
+    // New parameters for title functionality
+    this.title,
+    this.isRequired = false,
+    this.titleStyle,
+    this.showTitle = true,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
+    final bool hideNonFocusedBorders =
+        enabledBorderColor == Colors.transparent && disabledBorderColor == Colors.transparent && borderColor == Colors.transparent;
+
+    final textField = TextFormField(
       controller: controller,
       obscureText: obscureText,
       cursorColor: cursorColor,
+      readOnly: readOnly,
       validator: validator,
       keyboardType: keyboardType,
       maxLength: maxLength,
@@ -143,7 +167,9 @@ class CustomTextField extends StatelessWidget {
       minLines: minLines,
       onChanged: onChanged,
       style: textStyle,
+      onTap: onTap,
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      inputFormatters: inputFormatters,
       decoration: customDecoration ??
           InputDecoration(
             hintText: hintText,
@@ -159,9 +185,9 @@ class CustomTextField extends StatelessWidget {
                     suffixIcon,
                     color: suffixIconColor,
                     size: suffixIconSize,
-                  ).onTap(onTapSuffixIcon!)
+                  ).onTap(onTapSuffixIcon ?? () {})
                 : null,
-            border: isBorderNone == true
+            border: (hideNonFocusedBorders || isBorderNone == true)
                 ? InputBorder.none
                 : OutlineInputBorder(
                     borderSide: BorderSide(color: borderColor, width: borderWidth),
@@ -172,11 +198,12 @@ class CustomTextField extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: focusedBorderColor, width: borderWidth),
+              borderSide: BorderSide(color: enabledBorderColor, width: borderWidth),
               borderRadius: BorderRadius.circular(8),
             ),
+            // For disabledBorder, use InputBorder.none if hideNonFocusedBorders is true
             disabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: focusedBorderColor, width: borderWidth),
+              borderSide: BorderSide(color: disabledBorderColor, width: borderWidth),
               borderRadius: BorderRadius.circular(8),
             ),
             constraints: constraints,
@@ -186,6 +213,37 @@ class CustomTextField extends StatelessWidget {
             filled: filled,
             hintStyle: hintStyle,
           ),
+    );
+
+    if (!showTitle || title == null) {
+      return textField;
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        RichText(
+          text: TextSpan(
+            text: title,
+            style: titleStyle ?? const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            children: isRequired
+                ? [
+                    const TextSpan(
+                      text: ' *',
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ]
+                : null,
+          ),
+        ),
+        const SizedBox(height: 4),
+        textField,
+      ],
     );
   }
 }
@@ -259,6 +317,12 @@ class CustomDropdown<T> extends StatelessWidget {
   final FocusNode? focusNode;
   final Widget? underline;
 
+  // Title-related properties
+  final String? title;
+  final bool isRequired;
+  final TextStyle? titleStyle;
+  final bool showTitle;
+
   const CustomDropdown({
     required this.items,
     required this.hintText,
@@ -268,9 +332,9 @@ class CustomDropdown<T> extends StatelessWidget {
     this.hintStyle,
     this.textStyle,
     this.borderColor = Colors.grey,
-    this.focusedBorderColor = Colors.blue, // Replace with primaryBlueColor
-    this.disabledBorderColor = Colors.blue, // Replace with primaryBlueColor
-    this.enabledBorderColor = Colors.blue, // Replace with primaryBlueColor
+    this.focusedBorderColor = Colors.blue,
+    this.disabledBorderColor = Colors.blue,
+    this.enabledBorderColor = Colors.blue,
     this.dropdownIconColor = Colors.grey,
     this.borderWidth = 1.0,
     this.contentPadding,
@@ -289,12 +353,16 @@ class CustomDropdown<T> extends StatelessWidget {
     this.autoFocus = false,
     this.focusNode,
     this.underline,
+    this.title,
+    this.isRequired = false,
+    this.titleStyle,
+    this.showTitle = true,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonHideUnderline(
+    final dropdown = DropdownButtonHideUnderline(
       child: DropdownButton2<T>(
         autofocus: autoFocus,
         focusNode: focusNode,
@@ -312,11 +380,7 @@ class CustomDropdown<T> extends StatelessWidget {
               ),
             Text(
               hintText,
-              style: hintStyle ??
-                  const TextStyle(
-                    color: Colors.grey,
-                    fontSize: 14,
-                  ),
+              style: hintStyle ?? const TextStyle(color: Colors.grey, fontSize: 14),
             ),
           ],
         ),
@@ -331,10 +395,7 @@ class CustomDropdown<T> extends StatelessWidget {
         buttonStyleData: ButtonStyleData(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: enabledBorderColor,
-              width: borderWidth,
-            ),
+            border: Border.all(color: enabledBorderColor, width: borderWidth),
             color: fillColor,
           ),
           padding: contentPadding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -342,10 +403,7 @@ class CustomDropdown<T> extends StatelessWidget {
           width: double.infinity,
         ),
         iconStyleData: IconStyleData(
-          icon: Icon(
-            Icons.arrow_drop_down,
-            color: dropdownIconColor,
-          ),
+          icon: Icon(Icons.arrow_drop_down, color: dropdownIconColor),
           iconSize: 24,
         ),
         dropdownStyleData: DropdownStyleData(
@@ -354,10 +412,7 @@ class CustomDropdown<T> extends StatelessWidget {
           decoration: dropdownDecoration ??
               BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: borderColor,
-                  width: borderWidth,
-                ),
+                border: Border.all(color: borderColor, width: borderWidth),
                 color: Theme.of(context).brightness == Brightness.dark ? Colors.black : Colors.white,
               ),
           offset: const Offset(0, -5),
@@ -371,13 +426,33 @@ class CustomDropdown<T> extends StatelessWidget {
           height: 40,
           padding: EdgeInsets.symmetric(horizontal: 14),
         ),
-        style: textStyle ??
-            const TextStyle(
-              color: Colors.black,
-              fontSize: 14,
-            ),
+        style: textStyle ?? const TextStyle(color: Colors.black, fontSize: 14),
         customButton: customButton,
       ),
+    );
+
+    if (!showTitle || title == null) return dropdown;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        RichText(
+          text: TextSpan(
+            text: title,
+            style: titleStyle ?? const TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.black),
+            children: isRequired
+                ? [
+                    const TextSpan(
+                      text: ' *',
+                      style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+                    ),
+                  ]
+                : null,
+          ),
+        ),
+        const SizedBox(height: 4),
+        dropdown,
+      ],
     );
   }
 }
@@ -963,18 +1038,58 @@ class CustomText extends StatelessWidget {
   }
 }
 
-// Enum to track which text theme style to use
-enum TextThemeStyle {
-  headlineLarge,
-  headlineMedium,
-  headlineSmall,
-  titleLarge,
-  titleMedium,
-  titleSmall,
-  bodyLarge,
-  bodyMedium,
-  bodySmall,
-  labelLarge,
-  labelMedium,
-  labelSmall,
+class CustomDatePicker {
+  static Future<DateTime?> pick({
+    required BuildContext context,
+    required DatePickerModeEnum mode,
+    DateTime? initialDate,
+    DateTime? firstDate,
+    DateTime? lastDate,
+    String? dateFormat, // Optional custom format
+  }) async {
+    DateTime now = DateTime.now();
+
+    initialDate ??= now;
+    firstDate ??= DateTime(1900);
+    lastDate ??= DateTime(2100);
+
+    DateTime? selectedDate;
+
+    if (mode == DatePickerModeEnum.date || mode == DatePickerModeEnum.dateTime) {
+      selectedDate = await showDatePicker(
+        context: context,
+        initialDate: initialDate,
+        firstDate: firstDate,
+        lastDate: lastDate,
+        builder: (context, child) {
+          return Theme(
+            data: Theme.of(context).copyWith(
+              colorScheme: const ColorScheme.light(
+                primary: Colors.teal, // Customize color
+              ),
+            ),
+            child: child!,
+          );
+        },
+      );
+      if (selectedDate == null) return null;
+    }
+
+    if (mode == DatePickerModeEnum.time || mode == DatePickerModeEnum.dateTime) {
+      TimeOfDay? time = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.fromDateTime(initialDate),
+      );
+      if (time == null) return selectedDate ?? initialDate;
+
+      final date = selectedDate ?? now;
+      selectedDate = DateTime(date.year, date.month, date.day, time.hour, time.minute);
+    }
+
+    return selectedDate;
+  }
+
+  static String formatDateTime(DateTime dateTime, {String format = 'yyyy-MM-dd'}) {
+    return DateFormat(format).format(dateTime);
+  }
 }

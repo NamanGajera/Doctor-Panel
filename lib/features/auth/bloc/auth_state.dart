@@ -9,7 +9,7 @@ class AuthState extends Equatable {
   });
 
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [isLoginPage];
 
   AuthState copyWith({
     bool? isLoginPage,
