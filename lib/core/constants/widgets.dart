@@ -241,7 +241,7 @@ class CustomTextField extends StatelessWidget {
                 : null,
           ),
         ),
-        const SizedBox(height: 4),
+        const SizedBox(height: 6),
         textField,
       ],
     );
@@ -406,6 +406,24 @@ class CustomDropdown<T> extends StatelessWidget {
           icon: Icon(Icons.arrow_drop_down, color: dropdownIconColor),
           iconSize: 24,
         ),
+        selectedItemBuilder: (context) {
+          return items.map((item) {
+            return Row(
+              children: [
+                if (prefixIcon != null)
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Icon(
+                      prefixIcon,
+                      color: prefixIconColor,
+                      size: prefixIconSize,
+                    ),
+                  ),
+                itemBuilder(item),
+              ],
+            );
+          }).toList();
+        },
         dropdownStyleData: DropdownStyleData(
           maxHeight: dropdownMaxHeight ?? 200,
           width: dropdownWidth,

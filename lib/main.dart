@@ -13,7 +13,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPrefsHelper.init();
   await setupDependencies();
-  setUrlStrategy(const PathUrlStrategy());
+  setUrlStrategy( PathUrlStrategy());
   runApp(const MyApp());
 }
 
