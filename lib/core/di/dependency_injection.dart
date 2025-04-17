@@ -1,4 +1,5 @@
 import 'package:doctor_panel/features/auth/bloc/auth_bloc.dart';
+import 'package:doctor_panel/features/mainLayout/bloc/main_layout_bloc.dart';
 import 'package:doctor_panel/features/profile/bloc/profile_screen_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,4 +12,5 @@ Future<void> setupDependencies() async {
 
   getIt.registerFactory<AuthBloc>(() => AuthBloc());
   getIt.registerFactory<ProfileScreenBloc>(() => ProfileScreenBloc());
+  getIt.registerFactory<MainLayoutBloc>(() => MainLayoutBloc());
 }

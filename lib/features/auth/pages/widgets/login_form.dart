@@ -1,10 +1,10 @@
 import 'package:doctor_panel/core/extension/build_context_extenstion.dart';
 import 'package:doctor_panel/routers/route_path.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/widgets.dart';
+import '../../../../routers/router.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -115,7 +115,7 @@ class _LoginFormState extends State<LoginForm> {
         CustomButton(
           label: 'Login',
           onPressed: () {
-            context.go(completeProfilePath);
+            appRouter.go(mainLayoutScreenPath);
           },
           color: Colors.black,
           textColor: Colors.white,

@@ -1,4 +1,5 @@
 import 'package:doctor_panel/features/auth/bloc/auth_bloc.dart';
+import 'package:doctor_panel/features/mainLayout/bloc/main_layout_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
@@ -13,7 +14,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPrefsHelper.init();
   await setupDependencies();
-  setUrlStrategy( PathUrlStrategy());
+  setUrlStrategy(PathUrlStrategy());
   runApp(const MyApp());
 }
 
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(create: (context) => AuthBloc()),
             BlocProvider(create: (context) => ProfileScreenBloc()),
+            BlocProvider(create: (context) => MainLayoutBloc()),
           ],
           child: MaterialApp.router(
             title: 'Doctor House',
