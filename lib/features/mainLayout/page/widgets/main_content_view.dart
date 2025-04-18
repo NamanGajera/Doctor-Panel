@@ -1,18 +1,98 @@
+import 'package:doctor_panel/core/constants/images.dart';
+import 'package:doctor_panel/core/extension/widget_extension.dart';
+import 'package:doctor_panel/features/mainLayout/bloc/main_layout_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MainContentView extends StatefulWidget {
-  const MainContentView({super.key});
+import '../../../../core/constants/icons.dart';
+import '../../../../core/constants/widgets.dart';
 
-  @override
-  State<MainContentView> createState() => _MainContentViewState();
-}
+class MainContentView extends StatelessWidget {
+  final Widget child;
 
-class _MainContentViewState extends State<MainContentView> {
+  const MainContentView({
+    super.key,
+    required this.child,
+  });
+
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 10,
-      child: Container(),
+    return BlocBuilder<MainLayoutBloc, MainLayoutState>(
+      builder: (context, state) {
+        return Expanded(
+          flex: state.isExpanded ? 11 : 16,
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  CustomIconContainer(
+                    iconPath: AppIcons.chatIcon,
+                    backgroundColor: Colors.white,
+                    borderRadius: 40,
+                    isSvg: true,
+                    borderColor: Colors.grey.shade300,
+                    height: 18,
+                    width: 18,
+                    padding: 8,
+                  ),
+                  const SizedBox(width: 15),
+                  CustomIconContainer(
+                    iconPath: AppIcons.notificationIcon,
+                    backgroundColor: Colors.white,
+                    borderRadius: 40,
+                    isSvg: true,
+                    borderColor: Colors.grey.shade300,
+                    height: 18,
+                    width: 18,
+                    padding: 8,
+                  ),
+                  const SizedBox(width: 15),
+                  CustomIconContainer(
+                    iconPath: AppIcons.settingIcon,
+                    backgroundColor: Colors.white,
+                    borderRadius: 40,
+                    isSvg: true,
+                    borderColor: Colors.grey.shade300,
+                    height: 18,
+                    width: 18,
+                    padding: 8,
+                  ),
+                  SizedBox(width: 30),
+                  CustomIconContainer(
+                    iconPath: AppImages.doctorProfile,
+                    backgroundColor: Colors.white,
+                    borderRadius: 40,
+                    padding: 0,
+                    borderColor: Colors.grey.shade300,
+                    height: 35,
+                    width: 35,
+                  ),
+                  SizedBox(width: 6),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomText(
+                        'Naman Gajera',
+                        fontSize: 12,
+                        height: 0,
+                      ),
+                      CustomText(
+                        'Dentist',
+                        fontSize: 10,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(width: 30),
+                ],
+              ).withPadding(EdgeInsets.symmetric(vertical: 10)),
+              Expanded(
+                child: child,
+              ),
+            ],
+          ), // This will be the current route's widget
+        );
+      },
     );
   }
 }

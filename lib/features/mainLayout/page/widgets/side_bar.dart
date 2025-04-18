@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:doctor_panel/core/constants/icons.dart';
 import 'package:doctor_panel/core/constants/images.dart';
 import 'package:doctor_panel/core/constants/widgets.dart';
@@ -42,8 +40,6 @@ class _SideBarState extends State<SideBar> {
     'Setting',
   ];
 
-  // bool _isExpanded = true;
-
   @override
   Widget build(BuildContext context) {
     // Check if the screen width is small
@@ -58,166 +54,160 @@ class _SideBarState extends State<SideBar> {
 
         return Expanded(
           flex: state.isExpanded ? 2 : 1,
-          child: GestureDetector(
-            onTap: () {
-              log('screenWidth ${screenWidth}');
-            },
-            child: Container(
-              height: context.screenHeight,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    spreadRadius: 2,
-                    blurRadius: 8,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              padding: const EdgeInsets.symmetric(vertical: 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Logo and Toggle Button Row
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Row(
-                      children: [
-                        if (state.isExpanded) ...[
-                          Image.asset(
-                            AppImages.appLogo,
-                            width: 35,
-                            height: 35,
-                          ),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: RichText(
-                              maxLines: 1,
-                              text: const TextSpan(
-                                text: 'Doctor',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                ),
-                                children: [
-                                  TextSpan(
-                                    text: 'House',
-                                    style: TextStyle(
-                                      color: logoBlueColor,
-                                    ),
+          child: Container(
+            height: context.screenHeight,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  spreadRadius: 2,
+                  blurRadius: 8,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                /// Logo and Toggle Button Row
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Row(
+                    children: [
+                      if (state.isExpanded) ...[
+                        Image.asset(
+                          AppImages.appLogo,
+                          width: 30,
+                          height: 30,
+                        ),
+                        const SizedBox(width: 5),
+                        Expanded(
+                          child: RichText(
+                            maxLines: 1,
+                            text: const TextSpan(
+                              text: 'Doctor',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: 'House',
+                                  style: TextStyle(
+                                    color: logoBlueColor,
                                   ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          const Spacer(),
-                        ],
-                        // Toggle button using a custom container instead of IconButton
-                        GestureDetector(
-                          onTap: () {
-                            context.addMainLayoutEvent(ExpandSideBarEvent(isExpand: !state.isExpanded));
-                          },
-                          child: MouseRegion(
-                            cursor: SystemMouseCursors.click,
-                            child: Container(
-                              width: 28,
-                              height: 28,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(6),
-                                border: Border.all(
-                                  color: Colors.black12,
-                                  width: 1,
                                 ),
-                              ),
-                              child: Center(
-                                child: Icon(
-                                  state.isExpanded ? Icons.chevron_left : Icons.chevron_right,
-                                  color: Colors.black54,
-                                  size: 18,
-                                ),
-                              ),
+                              ],
                             ),
                           ),
                         ),
                       ],
-                    ),
-                  ),
-                  const SizedBox(height: 30),
-
-                  // Menu Items
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: sideBarMenuName.length,
-                      padding: EdgeInsets.zero,
-                      itemBuilder: (context, index) {
-                        final isSelected = state.selectedIndex == index;
-                        final isHovered = state.hoveredIndex == index;
-
-                        return MouseRegion(
-                          onEnter: (_) {
-                            context.addMainLayoutEvent(HoveredMenuEvent(hoveredIndex: index));
-                          },
-                          onExit: (_) {
-                            context.addMainLayoutEvent(HoveredMenuEvent(hoveredIndex: -1));
-                          },
+                      // Toggle button using a custom container instead of IconButton
+                      GestureDetector(
+                        onTap: () {
+                          context.addMainLayoutEvent(ExpandSideBarEvent(isExpand: !state.isExpanded));
+                        },
+                        child: MouseRegion(
                           cursor: SystemMouseCursors.click,
-                          child: GestureDetector(
-                            onTap: () {
-                              context.addMainLayoutEvent(ChangeMenuEvent(selectedIndex: index));
-                            },
-                            child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 200),
-                              margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                              width: double.infinity,
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: state.isExpanded ? 12 : 15,
+                          child: Container(
+                            width: state.isExpanded ? 28 : 45,
+                            height: state.isExpanded ? 28 : 45,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(6),
+                              border: Border.all(
+                                color: Colors.black12,
+                                width: 1,
                               ),
-                              decoration: BoxDecoration(
-                                color: isSelected ? primaryDarkBlueColor : Colors.transparent,
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: isHovered && !isSelected
-                                      ? primaryDarkBlueColor.withOpacity(0.5)
-                                      : isSelected
-                                          ? primaryDarkBlueColor
-                                          : Colors.transparent,
-                                ),
-                              ),
-                              transform: isHovered && !isSelected ? (Matrix4.identity()..scale(1.03)) : Matrix4.identity(),
-                              child: Row(
-                                mainAxisAlignment: state.isExpanded ? MainAxisAlignment.start : MainAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset(
-                                    sideBarMenuIcons[index],
-                                    color: isSelected ? Colors.white : Colors.black54,
-                                    height: 20,
-                                    width: 20,
-                                  ),
-                                  if (state.isExpanded) ...[
-                                    const SizedBox(width: 10),
-                                    Expanded(
-                                      child: CustomText(
-                                        sideBarMenuName[index],
-                                        style: TextStyle(
-                                          color: isSelected ? Colors.white : Colors.black87,
-                                          fontWeight: isSelected || isHovered ? FontWeight.w500 : FontWeight.normal,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ],
+                            ),
+                            child: Center(
+                              child: Icon(
+                                state.isExpanded ? Icons.chevron_left : Icons.chevron_right,
+                                color: Colors.black54,
+                                size: state.isExpanded ? 18 : 22,
                               ),
                             ),
                           ),
-                        );
-                      },
-                    ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                const SizedBox(height: 20),
+
+                /// Menu Items
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: sideBarMenuName.length,
+                    padding: EdgeInsets.zero,
+                    itemBuilder: (context, index) {
+                      final isSelected = state.selectedIndex == index;
+                      final isHovered = state.hoveredIndex == index;
+
+                      return MouseRegion(
+                        onEnter: (_) {
+                          context.addMainLayoutEvent(HoveredMenuEvent(hoveredIndex: index));
+                        },
+                        onExit: (_) {
+                          context.addMainLayoutEvent(HoveredMenuEvent(hoveredIndex: -1));
+                        },
+                        cursor: SystemMouseCursors.click,
+                        child: GestureDetector(
+                          onTap: () {
+                            context.addMainLayoutEvent(ChangeMenuEvent(selectedIndex: index));
+                          },
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                            width: double.infinity,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: state.isExpanded ? 12 : 15,
+                            ),
+                            decoration: BoxDecoration(
+                              color: isSelected ? primaryDarkBlueColor : Colors.transparent,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: isHovered && !isSelected
+                                    ? primaryDarkBlueColor.withOpacity(0.5)
+                                    : isSelected
+                                        ? primaryDarkBlueColor
+                                        : Colors.transparent,
+                              ),
+                            ),
+                            transform: isHovered && !isSelected ? (Matrix4.identity()..scale(1.03)) : Matrix4.identity(),
+                            child: Row(
+                              mainAxisAlignment: state.isExpanded ? MainAxisAlignment.start : MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(
+                                  sideBarMenuIcons[index],
+                                  color: isSelected ? Colors.white : Colors.black54,
+                                  height: 20,
+                                  width: 20,
+                                ),
+                                if (state.isExpanded) ...[
+                                  const SizedBox(width: 10),
+                                  Expanded(
+                                    child: CustomText(
+                                      sideBarMenuName[index],
+                                      style: TextStyle(
+                                        color: isSelected ? Colors.white : Colors.black87,
+                                        fontWeight: isSelected || isHovered ? FontWeight.w500 : FontWeight.normal,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
         );

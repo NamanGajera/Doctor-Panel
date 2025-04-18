@@ -3,6 +3,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 
 import '../../utils/enums.dart';
@@ -255,15 +256,19 @@ class CustomIconContainer extends StatelessWidget {
   final double padding;
   final Color backgroundColor;
   final double borderRadius;
+  final bool isSvg;
+  final Color? borderColor;
 
   const CustomIconContainer({
     super.key,
     required this.iconPath,
     this.height = 23.0,
     this.width = 23.0,
-    this.padding = 5.0,
+    this.padding = 0,
     this.backgroundColor = const Color(0xffededff),
     this.borderRadius = 20.0,
+    this.isSvg = false,
+    this.borderColor,
   });
 
   @override
@@ -272,15 +277,24 @@ class CustomIconContainer extends StatelessWidget {
       padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
         color: backgroundColor,
+        border: Border.all(color: borderColor ?? Colors.transparent),
         borderRadius: BorderRadius.circular(borderRadius),
       ),
+      clipBehavior: Clip.hardEdge,
       child: Align(
         alignment: Alignment.center,
-        child: Image.asset(
-          iconPath,
-          height: height,
-          width: width,
-        ),
+        child: isSvg
+            ? SvgPicture.asset(
+                iconPath,
+                height: height,
+                width: width,
+              )
+            : Image.asset(
+                iconPath,
+                height: height,
+                width: width,
+                fit: BoxFit.fill,
+              ),
       ),
     );
   }

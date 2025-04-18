@@ -7,4 +7,5 @@ class AppIcons {
   static const String personIcon = 'assets/icons/person_icon.svg';
   static const String prescriptionsIcon = 'assets/icons/prescriptions_icon.svg';
   static const String settingIcon = 'assets/icons/setting_icon.svg';
+  static const String notificationIcon = 'assets/icons/notification_icon.svg';
 }

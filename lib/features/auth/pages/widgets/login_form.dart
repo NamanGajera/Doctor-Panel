@@ -1,5 +1,5 @@
 import 'package:doctor_panel/core/extension/build_context_extenstion.dart';
-import 'package:doctor_panel/routers/route_path.dart';
+import 'package:doctor_panel/routers/route_names.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/colors.dart';
@@ -115,7 +115,7 @@ class _LoginFormState extends State<LoginForm> {
         CustomButton(
           label: 'Login',
           onPressed: () {
-            appRouter.go(mainLayoutScreenPath);
+            appRouter.goNamed(dashboardPageName);
           },
           color: Colors.black,
           textColor: Colors.white,
