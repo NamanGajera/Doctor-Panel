@@ -10,3 +10,4 @@ const Color lightRed = Color(0xffFFC5C5);
 const Color lightBlue = Color(0xffD2E0FB);
 const Color lightGreen1 = Color(0xffD2E3C8);
 const Color lightGreen2 = Color(0xFFF0F7F4);
+const Color lightLavender = Color(0XFFD7D7F4);

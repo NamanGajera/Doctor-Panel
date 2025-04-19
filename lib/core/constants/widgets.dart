@@ -250,18 +250,21 @@ class CustomTextField extends StatelessWidget {
 }
 
 class CustomIconContainer extends StatelessWidget {
-  final String iconPath;
+  final String? iconPath;
   final double height;
   final double width;
   final double padding;
   final Color backgroundColor;
   final double borderRadius;
   final bool isSvg;
+  final IconData? iconData;
   final Color? borderColor;
+  final double? iconsSize;
+  final Color? iconColor;
 
   const CustomIconContainer({
     super.key,
-    required this.iconPath,
+    this.iconPath,
     this.height = 23.0,
     this.width = 23.0,
     this.padding = 0,
@@ -269,6 +272,9 @@ class CustomIconContainer extends StatelessWidget {
     this.borderRadius = 20.0,
     this.isSvg = false,
     this.borderColor,
+    this.iconData,
+    this.iconsSize,
+    this.iconColor,
   });
 
   @override
@@ -283,18 +289,24 @@ class CustomIconContainer extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       child: Align(
         alignment: Alignment.center,
-        child: isSvg
-            ? SvgPicture.asset(
-                iconPath,
-                height: height,
-                width: width,
+        child: iconData != null
+            ? Icon(
+                iconData,
+                color: iconColor,
+                size: iconsSize,
               )
-            : Image.asset(
-                iconPath,
-                height: height,
-                width: width,
-                fit: BoxFit.fill,
-              ),
+            : isSvg
+                ? SvgPicture.asset(
+                    iconPath ?? '',
+                    height: height,
+                    width: width,
+                  )
+                : Image.asset(
+                    iconPath ?? '',
+                    height: height,
+                    width: width,
+                    fit: BoxFit.fill,
+                  ),
       ),
     );
   }
