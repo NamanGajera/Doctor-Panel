@@ -20,17 +20,17 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
     {
       'title': 'Personal Info',
       'icon': Icons.person_outlined,
-      'form': PersonalInfoForm(),
+      'form': const PersonalInfoForm(),
     },
     {
       'title': 'Education',
       'icon': Icons.school_outlined,
-      'form': EducationInfoForm(),
+      'form': const EducationInfoForm(),
     },
     {
       'title': 'Experience',
       'icon': Icons.work_outline_outlined,
-      'form': ExperienceInfoForm(),
+      'form': const ExperienceInfoForm(),
     },
   ];
 
@@ -51,7 +51,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
           appBar: AppBar(
             backgroundColor: Colors.white,
             elevation: 0,
-            title: Text(
+            title: const Text(
               'Doctor Profile Setup',
               style: TextStyle(
                 color: primaryDarkBlueColor,
@@ -60,7 +60,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
             ),
             centerTitle: true,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: primaryDarkBlueColor),
+              icon: const Icon(Icons.arrow_back, color: primaryDarkBlueColor),
               onPressed: () => Navigator.of(context).pop(),
             ),
           ),
@@ -381,7 +381,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
               label: const Text('Back'),
               style: OutlinedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                side: BorderSide(color: primaryDarkBlueColor),
+                side: const BorderSide(color: primaryDarkBlueColor),
                 foregroundColor: primaryDarkBlueColor,
               ),
             )

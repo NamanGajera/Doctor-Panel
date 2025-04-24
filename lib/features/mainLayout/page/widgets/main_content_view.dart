@@ -58,7 +58,7 @@ class MainContentView extends StatelessWidget {
                     width: 18,
                     padding: 8,
                   ),
-                  SizedBox(width: 30),
+                  const SizedBox(width: 30),
                   CustomIconContainer(
                     iconPath: AppImages.doctorProfile,
                     backgroundColor: Colors.white,
@@ -68,8 +68,8 @@ class MainContentView extends StatelessWidget {
                     height: 35,
                     width: 35,
                   ),
-                  SizedBox(width: 6),
-                  Column(
+                  const SizedBox(width: 6),
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomText(
@@ -85,7 +85,7 @@ class MainContentView extends StatelessWidget {
                   ),
                   const SizedBox(width: 30),
                 ],
-              ).withPadding(EdgeInsets.symmetric(vertical: 10)),
+              ).withPadding(const EdgeInsets.symmetric(vertical: 10)),
               Expanded(
                 child: child,
               ),

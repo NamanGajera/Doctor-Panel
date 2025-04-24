@@ -107,11 +107,11 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
+                  const Row(
                     children: [
                       Icon(Icons.person, color: primaryBlueColor),
-                      const SizedBox(width: 10),
-                      const Text(
+                      SizedBox(width: 10),
+                      Text(
                         'Personal Details',
                         style: TextStyle(
                           fontSize: 18,
@@ -147,11 +147,11 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
+                  const Row(
                     children: [
                       Icon(Icons.contact_phone, color: primaryBlueColor),
-                      const SizedBox(width: 10),
-                      const Text(
+                      SizedBox(width: 10),
+                      Text(
                         'Contact Information',
                         style: TextStyle(
                           fontSize: 18,
@@ -191,7 +191,7 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                       backgroundColor: Colors.white,
-                      side: BorderSide(color: primaryBlueColor),
+                      side: const BorderSide(color: primaryBlueColor),
                       foregroundColor: primaryBlueColor,
                     ),
                     child: const Text(
@@ -299,7 +299,7 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
                     onTap: _pickImage,
                     child: Container(
                       padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         gradient: LinearGradient(
                           colors: [primaryBlueColor, primaryDarkBlueColor],
@@ -322,8 +322,8 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
         const SizedBox(height: 16),
         TextButton.icon(
           onPressed: _pickImage,
-          icon: Icon(Icons.cloud_upload, color: primaryBlueColor, size: 20),
-          label: Text(
+          icon: const Icon(Icons.cloud_upload, color: primaryBlueColor, size: 20),
+          label: const Text(
             'Upload Photo',
             style: TextStyle(
               color: primaryBlueColor,
@@ -342,11 +342,11 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
+        const Row(
           children: [
             Icon(Icons.badge, color: primaryBlueColor),
-            const SizedBox(width: 10),
-            const Text(
+            SizedBox(width: 10),
+            Text(
               'Name',
               style: TextStyle(
                 fontSize: 18,
@@ -457,7 +457,7 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
                         : _selectedGender == "Female"
                             ? Icons.female
                             : Icons.person,
-                    items: ['Male', 'Female', 'Other'],
+                    items: const ['Male', 'Female', 'Other'],
                     itemBuilder: (item) {
                       return Row(
                         children: [
@@ -543,7 +543,7 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
                         : _selectedGender == "Female"
                             ? Icons.female
                             : Icons.person,
-                    items: ['Male', 'Female', 'Other'],
+                    items: const ['Male', 'Female', 'Other'],
                     itemBuilder: (item) {
                       return Row(
                         children: [

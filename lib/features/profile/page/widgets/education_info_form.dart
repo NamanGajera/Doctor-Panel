@@ -65,11 +65,11 @@ class _EducationInfoFormState extends State<EducationInfoForm> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
+                  const Row(
                     children: [
                       Icon(Icons.person, color: primaryBlueColor),
-                      const SizedBox(width: 10),
-                      const Text(
+                      SizedBox(width: 10),
+                      Text(
                         'Basic Qualification',
                         style: TextStyle(
                           fontSize: 18,
@@ -105,11 +105,11 @@ class _EducationInfoFormState extends State<EducationInfoForm> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
+                  const Row(
                     children: [
                       Icon(Icons.contact_phone, color: primaryBlueColor),
-                      const SizedBox(width: 10),
-                      const Text(
+                      SizedBox(width: 10),
+                      Text(
                         'Medical Council Registration',
                         style: TextStyle(
                           fontSize: 18,
@@ -149,7 +149,7 @@ class _EducationInfoFormState extends State<EducationInfoForm> {
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                       backgroundColor: Colors.white,
-                      side: BorderSide(color: primaryBlueColor),
+                      side: const BorderSide(color: primaryBlueColor),
                       foregroundColor: primaryBlueColor,
                     ),
                     child: const Text(
@@ -242,7 +242,7 @@ class _EducationInfoFormState extends State<EducationInfoForm> {
             )),
           ],
         ),
-        SizedBox(height: 15),
+        const SizedBox(height: 15),
         Row(
           children: [
             Expanded(

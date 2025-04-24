@@ -16,9 +16,9 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -92,75 +92,109 @@ class _DashboardPageState extends State<DashboardPage> {
                     ),
                     child: Row(
                       children: [
-                        Expanded(flex: 2, child: Center(child: CustomText(''))),
+                        const Expanded(flex: 2, child: Center(child: CustomText(''))),
                         _rowVerticalDivider(),
-                        Expanded(flex: 4, child: CustomText('Patient Name').withPadding(EdgeInsets.only(left: 8))),
+                        Expanded(
+                            flex: 4,
+                            child: const CustomText('Patient Name')
+                                .withPadding(const EdgeInsets.only(left: 8))),
                         _rowVerticalDivider(),
-                        Expanded(flex: 4, child: CustomText('Date').withPadding(EdgeInsets.only(left: 8))),
+                        Expanded(
+                            flex: 4,
+                            child: const CustomText('Date')
+                                .withPadding(const EdgeInsets.only(left: 8))),
                         _rowVerticalDivider(),
-                        Expanded(flex: 3, child: CustomText('Time').withPadding(EdgeInsets.only(left: 8))),
+                        Expanded(
+                            flex: 3,
+                            child: const CustomText('Time')
+                                .withPadding(const EdgeInsets.only(left: 8))),
                         _rowVerticalDivider(),
-                        Expanded(flex: 5, child: CustomText('Treatment').withPadding(EdgeInsets.only(left: 8))),
+                        Expanded(
+                            flex: 5,
+                            child: const CustomText('Treatment')
+                                .withPadding(const EdgeInsets.only(left: 8))),
                         _rowVerticalDivider(),
-                        Expanded(flex: 4, child: CustomText('Appointment').withPadding(EdgeInsets.only(left: 8))),
+                        Expanded(
+                            flex: 4,
+                            child: const CustomText('Appointment')
+                                .withPadding(const EdgeInsets.only(left: 8))),
                         _rowVerticalDivider(),
-                        Expanded(flex: 4, child: CustomText('Payment').withPadding(EdgeInsets.only(left: 8))),
+                        Expanded(
+                            flex: 4,
+                            child: const CustomText('Payment')
+                                .withPadding(const EdgeInsets.only(left: 8))),
                         _rowVerticalDivider(),
-                        Expanded(flex: 4, child: CustomText('Duration').withPadding(EdgeInsets.only(left: 8))),
+                        Expanded(
+                            flex: 4,
+                            child: const CustomText('Duration')
+                                .withPadding(const EdgeInsets.only(left: 8))),
                         _rowVerticalDivider(),
-                        Expanded(flex: 4, child: CustomText('Attachment').withPadding(EdgeInsets.only(left: 8))),
+                        Expanded(
+                            flex: 4,
+                            child: const CustomText('Attachment')
+                                .withPadding(const EdgeInsets.only(left: 8))),
                       ],
                     ),
                   ),
 
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
 
                   // Example List (can be dynamic using ListView.builder)
-                  ...List.generate(3, (index) {
+                  ...List.generate(10, (index) {
                     return Container(
                       decoration: BoxDecoration(
                         border: Border(
                           bottom: BorderSide(color: Colors.grey.shade300),
                         ),
                       ),
-                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                       child: Row(
                         children: [
                           Expanded(
                             flex: 2,
-                            child: Checkbox(value: false, onChanged: (value) {}),
+                            child:
+                                Checkbox(value: false, onChanged: (value) {}),
                           ),
                           Expanded(
                             flex: 4,
-                            child: CustomText('John Doe').withPadding(EdgeInsets.only(left: 8)),
+                            child: const CustomText('John Doe')
+                                .withPadding(const EdgeInsets.only(left: 8)),
                           ),
                           Expanded(
                             flex: 4,
-                            child: CustomText('19 Apr 2025').withPadding(EdgeInsets.only(left: 8)),
+                            child: const CustomText('19 Apr 2025')
+                                .withPadding(const EdgeInsets.only(left: 8)),
                           ),
                           Expanded(
                             flex: 3,
-                            child: CustomText('10:30 AM').withPadding(EdgeInsets.only(left: 8)),
+                            child: const CustomText('10:30 AM')
+                                .withPadding(const EdgeInsets.only(left: 8)),
                           ),
                           Expanded(
                             flex: 5,
-                            child: CustomText('Root Canal').withPadding(EdgeInsets.only(left: 8)),
+                            child: const CustomText('Root Canal')
+                                .withPadding(const EdgeInsets.only(left: 8)),
                           ),
                           Expanded(
                             flex: 4,
-                            child: CustomText('Confirmed').withPadding(EdgeInsets.only(left: 8)),
+                            child: const CustomText('Confirmed')
+                                .withPadding(const EdgeInsets.only(left: 8)),
                           ),
                           Expanded(
                             flex: 4,
-                            child: CustomText('Paid').withPadding(EdgeInsets.only(left: 8)),
+                            child: const CustomText('Paid')
+                                .withPadding(const EdgeInsets.only(left: 8)),
                           ),
                           Expanded(
                             flex: 4,
-                            child: CustomText('30 mins').withPadding(EdgeInsets.only(left: 8)),
+                            child: const CustomText('30 mins')
+                                .withPadding(const EdgeInsets.only(left: 8)),
                           ),
-                          Expanded(
+                          const Expanded(
                             flex: 4,
-                            child: Icon(Icons.attachment), // or use an icon button
+                            child:
+                                Icon(Icons.attachment), // or use an icon button
                           ),
                         ],
                       ),

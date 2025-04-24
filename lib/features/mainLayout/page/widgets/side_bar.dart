@@ -1,13 +1,15 @@
+
 import 'package:doctor_panel/core/constants/icons.dart';
 import 'package:doctor_panel/core/constants/images.dart';
 import 'package:doctor_panel/core/constants/widgets.dart';
 import 'package:doctor_panel/core/extension/bloc_event_call_extenstion.dart';
 import 'package:doctor_panel/core/extension/build_context_extenstion.dart';
 import 'package:doctor_panel/features/mainLayout/bloc/main_layout_bloc.dart';
+import 'package:doctor_panel/routers/route_names.dart';
+import 'package:doctor_panel/routers/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../../../core/constants/colors.dart';
 
 class SideBar extends StatefulWidget {
@@ -18,6 +20,17 @@ class SideBar extends StatefulWidget {
 }
 
 class _SideBarState extends State<SideBar> {
+  List<String> routeNames = [
+    dashboardPageName,
+    appointmentPageName,
+    patientPageName,
+    calendarPageName,
+    chatPageName,
+    prescriptionPageName,
+    helpSupportPageName,
+    settingPageName,
+  ];
+
   List<String> sideBarMenuIcons = [
     AppIcons.dashboardIcon,
     AppIcons.appointmentIcon,
@@ -107,7 +120,8 @@ class _SideBarState extends State<SideBar> {
                       // Toggle button using a custom container instead of IconButton
                       GestureDetector(
                         onTap: () {
-                          context.addMainLayoutEvent(ExpandSideBarEvent(isExpand: !state.isExpanded));
+                          context.addMainLayoutEvent(
+                              ExpandSideBarEvent(isExpand: !state.isExpanded));
                         },
                         child: MouseRegion(
                           cursor: SystemMouseCursors.click,
@@ -124,7 +138,9 @@ class _SideBarState extends State<SideBar> {
                             ),
                             child: Center(
                               child: Icon(
-                                state.isExpanded ? Icons.chevron_left : Icons.chevron_right,
+                                state.isExpanded
+                                    ? Icons.chevron_left
+                                    : Icons.chevron_right,
                                 color: Colors.black54,
                                 size: state.isExpanded ? 18 : 22,
                               ),
@@ -148,26 +164,33 @@ class _SideBarState extends State<SideBar> {
 
                       return MouseRegion(
                         onEnter: (_) {
-                          context.addMainLayoutEvent(HoveredMenuEvent(hoveredIndex: index));
+                          context.addMainLayoutEvent(
+                              HoveredMenuEvent(hoveredIndex: index));
                         },
                         onExit: (_) {
-                          context.addMainLayoutEvent(HoveredMenuEvent(hoveredIndex: -1));
+                          context.addMainLayoutEvent(
+                              HoveredMenuEvent(hoveredIndex: -1));
                         },
                         cursor: SystemMouseCursors.click,
                         child: GestureDetector(
                           onTap: () {
-                            context.addMainLayoutEvent(ChangeMenuEvent(selectedIndex: index));
+                            context.addMainLayoutEvent(
+                                ChangeMenuEvent(selectedIndex: index));
+                            appRouter.goNamed(routeNames[index]);
                           },
                           child: AnimatedContainer(
                             duration: const Duration(milliseconds: 200),
-                            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 4),
                             width: double.infinity,
                             padding: EdgeInsets.symmetric(
                               horizontal: 10,
                               vertical: state.isExpanded ? 12 : 15,
                             ),
                             decoration: BoxDecoration(
-                              color: isSelected ? primaryDarkBlueColor : Colors.transparent,
+                              color: isSelected
+                                  ? primaryDarkBlueColor
+                                  : Colors.transparent,
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
                                 color: isHovered && !isSelected
@@ -177,13 +200,19 @@ class _SideBarState extends State<SideBar> {
                                         : Colors.transparent,
                               ),
                             ),
-                            transform: isHovered && !isSelected ? (Matrix4.identity()..scale(1.03)) : Matrix4.identity(),
+                            transform: isHovered && !isSelected
+                                ? (Matrix4.identity()..scale(1.03))
+                                : Matrix4.identity(),
                             child: Row(
-                              mainAxisAlignment: state.isExpanded ? MainAxisAlignment.start : MainAxisAlignment.center,
+                              mainAxisAlignment: state.isExpanded
+                                  ? MainAxisAlignment.start
+                                  : MainAxisAlignment.center,
                               children: [
                                 SvgPicture.asset(
                                   sideBarMenuIcons[index],
-                                  color: isSelected ? Colors.white : Colors.black54,
+                                  color: isSelected
+                                      ? Colors.white
+                                      : Colors.black54,
                                   height: 20,
                                   width: 20,
                                 ),
@@ -193,8 +222,12 @@ class _SideBarState extends State<SideBar> {
                                     child: CustomText(
                                       sideBarMenuName[index],
                                       style: TextStyle(
-                                        color: isSelected ? Colors.white : Colors.black87,
-                                        fontWeight: isSelected || isHovered ? FontWeight.w500 : FontWeight.normal,
+                                        color: isSelected
+                                            ? Colors.white
+                                            : Colors.black87,
+                                        fontWeight: isSelected || isHovered
+                                            ? FontWeight.w500
+                                            : FontWeight.normal,
                                       ),
                                     ),
                                   ),

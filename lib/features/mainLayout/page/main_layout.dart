@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'widgets/side_bar.dart';
 
-class MainLayout extends StatelessWidget {
+class MainLayout extends StatefulWidget {
   final Widget child;
 
   const MainLayout({
@@ -12,13 +12,18 @@ class MainLayout extends StatelessWidget {
   });
 
   @override
+  State<MainLayout> createState() => _MainLayoutState();
+}
+
+class _MainLayoutState extends State<MainLayout> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Row(
         children: [
           const SideBar(),
           Expanded(
-            child: MainContentView(child: child),
+            child: MainContentView(child: widget.child),
           ),
         ],
       ),

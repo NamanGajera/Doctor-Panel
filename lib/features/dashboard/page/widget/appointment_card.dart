@@ -38,11 +38,11 @@ class AppointmentCard extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
             blurRadius: 10,
-            offset: Offset(0, 4),
+            offset: const Offset(0, 4),
           ),
         ],
       ),
-      padding: EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -69,12 +69,12 @@ class AppointmentCard extends StatelessWidget {
                 )
               else if (urgent)
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   decoration: BoxDecoration(
                     color: Colors.red.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Urgent',
                     style: TextStyle(
                       color: Colors.red,
@@ -85,7 +85,7 @@ class AppointmentCard extends StatelessWidget {
                 ),
             ],
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Row(
             children: [
               CustomText(
@@ -93,10 +93,10 @@ class AppointmentCard extends StatelessWidget {
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               if (trendValue.isNotEmpty && trendPositive)
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: Colors.green.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(12),
@@ -104,8 +104,8 @@ class AppointmentCard extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.arrow_upward, color: Colors.green, size: 14),
-                      SizedBox(width: 4),
+                      const Icon(Icons.arrow_upward, color: Colors.green, size: 14),
+                      const SizedBox(width: 4),
                       CustomText(
                         trendValue,
                         color: Colors.green,
@@ -117,7 +117,7 @@ class AppointmentCard extends StatelessWidget {
                 ),
             ],
           ),
-          SizedBox(height: 6),
+          const SizedBox(height: 6),
           CustomText(
             title,
             fontSize: 15,

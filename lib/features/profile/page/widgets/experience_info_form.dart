@@ -95,7 +95,7 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                       backgroundColor: Colors.white,
-                      side: BorderSide(color: primaryBlueColor),
+                      side: const BorderSide(color: primaryBlueColor),
                       foregroundColor: primaryBlueColor,
                     ),
                     child: const Text(
@@ -311,7 +311,7 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
         DropdownButtonFormField<String>(
           decoration: InputDecoration(
             labelText: 'Qualification Type',
-            prefixIcon: Icon(Icons.school, color: primaryBlueColor, size: 20),
+            prefixIcon: const Icon(Icons.school, color: primaryBlueColor, size: 20),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(color: Colors.grey.shade300),
@@ -322,7 +322,7 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: primaryBlueColor),
+              borderSide: const BorderSide(color: primaryBlueColor),
             ),
           ),
           value: _qualificationType,
@@ -345,7 +345,7 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
         DropdownButtonFormField<String>(
           decoration: InputDecoration(
             labelText: 'Registration Council',
-            prefixIcon: Icon(Icons.account_balance, color: primaryBlueColor, size: 20),
+            prefixIcon: const Icon(Icons.account_balance, color: primaryBlueColor, size: 20),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(color: Colors.grey.shade300),
@@ -356,7 +356,7 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: primaryBlueColor),
+              borderSide: const BorderSide(color: primaryBlueColor),
             ),
           ),
           value: _registrationCouncil,
@@ -664,14 +664,14 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
             color: Colors.blue.withOpacity(0.1),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Column(
+          child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
                   Icon(Icons.info, color: primaryBlueColor, size: 20),
-                  const SizedBox(width: 8),
-                  const Text(
+                  SizedBox(width: 8),
+                  Text(
                     'Upload Requirements',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -680,16 +680,16 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
-              const Text(
+              SizedBox(height: 8),
+              Text(
                 '• Please upload clear, high-quality scans of your original certificates',
                 style: TextStyle(fontSize: 14),
               ),
-              const Text(
+              Text(
                 '• Accepted formats: PDF, JPG, PNG (Max 5MB each)',
                 style: TextStyle(fontSize: 14),
               ),
-              const Text(
+              Text(
                 '• Required documents: Medical degree, Registration certificate, Specialty certificates',
                 style: TextStyle(fontSize: 14),
               ),
