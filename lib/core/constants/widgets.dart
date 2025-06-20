@@ -48,17 +48,22 @@ class CustomButton extends StatelessWidget {
         onPressed: isLoading ? () {} : onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: color,
-          padding: padding ?? const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius)),
+          padding: padding ??
+              const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(borderRadius)),
         ),
         child: isLoading
-            ? CupertinoActivityIndicator(color: loadingIndicatorColor ?? Colors.white)
+            ? CupertinoActivityIndicator(
+                color: loadingIndicatorColor ?? Colors.white)
             : Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (icon != null) Icon(icon, size: 20, color: textColor),
                   if (icon != null) const SizedBox(width: 8),
-                  Text(label, style: textStyle ?? TextStyle(fontSize: fontSize, color: textColor)),
+                  Text(label,
+                      style: textStyle ??
+                          TextStyle(fontSize: fontSize, color: textColor)),
                 ],
               ),
       ),
@@ -154,7 +159,9 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool hideNonFocusedBorders =
-        enabledBorderColor == Colors.transparent && disabledBorderColor == Colors.transparent && borderColor == Colors.transparent;
+        enabledBorderColor == Colors.transparent &&
+            disabledBorderColor == Colors.transparent &&
+            borderColor == Colors.transparent;
 
     final textField = TextFormField(
       controller: controller,
@@ -191,20 +198,24 @@ class CustomTextField extends StatelessWidget {
             border: (hideNonFocusedBorders || isBorderNone == true)
                 ? InputBorder.none
                 : OutlineInputBorder(
-                    borderSide: BorderSide(color: borderColor, width: borderWidth),
+                    borderSide:
+                        BorderSide(color: borderColor, width: borderWidth),
                     borderRadius: BorderRadius.circular(8),
                   ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: focusedBorderColor, width: borderWidth),
+              borderSide:
+                  BorderSide(color: focusedBorderColor, width: borderWidth),
               borderRadius: BorderRadius.circular(8),
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: enabledBorderColor, width: borderWidth),
+              borderSide:
+                  BorderSide(color: enabledBorderColor, width: borderWidth),
               borderRadius: BorderRadius.circular(8),
             ),
             // For disabledBorder, use InputBorder.none if hideNonFocusedBorders is true
             disabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: disabledBorderColor, width: borderWidth),
+              borderSide:
+                  BorderSide(color: disabledBorderColor, width: borderWidth),
               borderRadius: BorderRadius.circular(8),
             ),
             constraints: constraints,
@@ -227,7 +238,8 @@ class CustomTextField extends StatelessWidget {
         RichText(
           text: TextSpan(
             text: title,
-            style: titleStyle ?? const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            style: titleStyle ??
+                const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
             children: isRequired
                 ? [
                     const TextSpan(
@@ -406,7 +418,8 @@ class CustomDropdown<T> extends StatelessWidget {
               ),
             Text(
               hintText,
-              style: hintStyle ?? const TextStyle(color: Colors.grey, fontSize: 14),
+              style: hintStyle ??
+                  const TextStyle(color: Colors.grey, fontSize: 14),
             ),
           ],
         ),
@@ -424,7 +437,8 @@ class CustomDropdown<T> extends StatelessWidget {
             border: Border.all(color: enabledBorderColor, width: borderWidth),
             color: fillColor,
           ),
-          padding: contentPadding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: contentPadding ??
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           height: 50,
           width: double.infinity,
         ),
@@ -457,7 +471,9 @@ class CustomDropdown<T> extends StatelessWidget {
               BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: borderColor, width: borderWidth),
-                color: Theme.of(context).brightness == Brightness.dark ? Colors.black : Colors.white,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.black
+                    : Colors.white,
               ),
           offset: const Offset(0, -5),
           scrollbarTheme: ScrollbarThemeData(
@@ -483,12 +499,17 @@ class CustomDropdown<T> extends StatelessWidget {
         RichText(
           text: TextSpan(
             text: title,
-            style: titleStyle ?? const TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.black),
+            style: titleStyle ??
+                const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black),
             children: isRequired
                 ? [
                     const TextSpan(
                       text: ' *',
-                      style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          color: Colors.red, fontWeight: FontWeight.bold),
                     ),
                   ]
                 : null,
@@ -1015,19 +1036,23 @@ class CustomText extends StatelessWidget {
 
     switch (textThemeStyle) {
       case TextThemeStyle.headlineLarge:
-        baseStyle = Theme.of(context).textTheme.headlineLarge ?? const TextStyle();
+        baseStyle =
+            Theme.of(context).textTheme.headlineLarge ?? const TextStyle();
         break;
       case TextThemeStyle.headlineMedium:
-        baseStyle = Theme.of(context).textTheme.headlineMedium ?? const TextStyle();
+        baseStyle =
+            Theme.of(context).textTheme.headlineMedium ?? const TextStyle();
         break;
       case TextThemeStyle.headlineSmall:
-        baseStyle = Theme.of(context).textTheme.headlineSmall ?? const TextStyle();
+        baseStyle =
+            Theme.of(context).textTheme.headlineSmall ?? const TextStyle();
         break;
       case TextThemeStyle.titleLarge:
         baseStyle = Theme.of(context).textTheme.titleLarge ?? const TextStyle();
         break;
       case TextThemeStyle.titleMedium:
-        baseStyle = Theme.of(context).textTheme.titleMedium ?? const TextStyle();
+        baseStyle =
+            Theme.of(context).textTheme.titleMedium ?? const TextStyle();
         break;
       case TextThemeStyle.titleSmall:
         baseStyle = Theme.of(context).textTheme.titleSmall ?? const TextStyle();
@@ -1045,7 +1070,8 @@ class CustomText extends StatelessWidget {
         baseStyle = Theme.of(context).textTheme.labelLarge ?? const TextStyle();
         break;
       case TextThemeStyle.labelMedium:
-        baseStyle = Theme.of(context).textTheme.labelMedium ?? const TextStyle();
+        baseStyle =
+            Theme.of(context).textTheme.labelMedium ?? const TextStyle();
         break;
       case TextThemeStyle.labelSmall:
         baseStyle = Theme.of(context).textTheme.labelSmall ?? const TextStyle();
@@ -1069,7 +1095,8 @@ class CustomText extends StatelessWidget {
     );
 
     // Merge with any provided style
-    final TextStyle finalStyle = style != null ? effectiveStyle.merge(style) : effectiveStyle;
+    final TextStyle finalStyle =
+        style != null ? effectiveStyle.merge(style) : effectiveStyle;
 
     return Text(
       text,
@@ -1099,7 +1126,8 @@ class CustomDatePicker {
 
     DateTime? selectedDate;
 
-    if (mode == DatePickerModeEnum.date || mode == DatePickerModeEnum.dateTime) {
+    if (mode == DatePickerModeEnum.date ||
+        mode == DatePickerModeEnum.dateTime) {
       selectedDate = await showDatePicker(
         context: context,
         initialDate: initialDate,
@@ -1119,7 +1147,8 @@ class CustomDatePicker {
       if (selectedDate == null) return null;
     }
 
-    if (mode == DatePickerModeEnum.time || mode == DatePickerModeEnum.dateTime) {
+    if (mode == DatePickerModeEnum.time ||
+        mode == DatePickerModeEnum.dateTime) {
       TimeOfDay? time = await showTimePicker(
         context: context,
         initialTime: TimeOfDay.fromDateTime(initialDate),
@@ -1127,13 +1156,144 @@ class CustomDatePicker {
       if (time == null) return selectedDate ?? initialDate;
 
       final date = selectedDate ?? now;
-      selectedDate = DateTime(date.year, date.month, date.day, time.hour, time.minute);
+      selectedDate =
+          DateTime(date.year, date.month, date.day, time.hour, time.minute);
     }
 
     return selectedDate;
   }
 
-  static String formatDateTime(DateTime dateTime, {String format = 'yyyy-MM-dd'}) {
+  static String formatDateTime(DateTime dateTime,
+      {String format = 'yyyy-MM-dd'}) {
     return DateFormat(format).format(dateTime);
+  }
+}
+
+class CustomTabBar extends StatefulWidget {
+  final List<String> tabs;
+  final Function(int) onTabSelected;
+  final int initialIndex;
+  final Color selectedTabColor;
+  final Color unselectedTabColor;
+  final Color selectedTextColor;
+  final Color unselectedTextColor;
+  final Color backgroundColor;
+  final double height;
+  final double borderRadius;
+  final EdgeInsetsGeometry padding;
+  final TextStyle? selectedLabelStyle;
+  final TextStyle? unselectedLabelStyle;
+  final bool showBadge;
+  final List<int> badgeCounts;
+
+  const CustomTabBar({
+    super.key,
+    required this.tabs,
+    required this.onTabSelected,
+    this.initialIndex = 0,
+    this.selectedTabColor = const Color(0xFF00A884),
+    this.unselectedTabColor = Colors.transparent,
+    this.selectedTextColor = Colors.white,
+    this.unselectedTextColor = Colors.black87,
+    this.backgroundColor = const Color(0xFFF5F5F5),
+    this.height = 50.0,
+    this.borderRadius = 8.0,
+    this.padding = const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+    this.selectedLabelStyle,
+    this.unselectedLabelStyle,
+    this.showBadge = false,
+    this.badgeCounts = const [],
+  });
+
+  @override
+  State<CustomTabBar> createState() => _CustomTabBarState();
+}
+
+class _CustomTabBarState extends State<CustomTabBar> {
+  late int _selectedIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.initialIndex;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: widget.padding,
+      decoration: BoxDecoration(
+        color: widget.backgroundColor,
+        borderRadius: BorderRadius.circular(widget.borderRadius),
+      ),
+      child: Row(
+        children: List.generate(widget.tabs.length, (index) {
+          final isSelected = _selectedIndex == index;
+          final hasValidBadgeCount = widget.showBadge &&
+              widget.badgeCounts.length > index &&
+              widget.badgeCounts[index] > 0;
+
+          return Expanded(
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  _selectedIndex = index;
+                });
+                widget.onTabSelected(index);
+              },
+              child: Container(
+                height: widget.height,
+                decoration: BoxDecoration(
+                  color: isSelected
+                      ? widget.selectedTabColor
+                      : widget.unselectedTabColor,
+                  borderRadius: BorderRadius.circular(widget.borderRadius),
+                ),
+                alignment: Alignment.center,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Text(
+                      widget.tabs[index],
+                      style: isSelected
+                          ? (widget.selectedLabelStyle ??
+                              TextStyle(
+                                color: widget.selectedTextColor,
+                                fontWeight: FontWeight.bold,
+                              ))
+                          : (widget.unselectedLabelStyle ??
+                              TextStyle(
+                                color: widget.unselectedTextColor,
+                                fontWeight: FontWeight.normal,
+                              )),
+                    ),
+                    if (hasValidBadgeCount)
+                      Positioned(
+                        right: 10,
+                        top: 5,
+                        child: Container(
+                          padding: const EdgeInsets.all(5),
+                          decoration: const BoxDecoration(
+                            color: Colors.red,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Text(
+                            widget.badgeCounts[index].toString(),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }),
+      ),
+    );
   }
 }

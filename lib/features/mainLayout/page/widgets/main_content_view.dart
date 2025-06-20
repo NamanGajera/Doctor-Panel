@@ -17,82 +17,84 @@ class MainContentView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MainLayoutBloc, MainLayoutState>(
-      builder: (context, state) {
-        return Expanded(
-          flex: state.isExpanded ? 11 : 16,
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  CustomIconContainer(
-                    iconPath: AppIcons.chatIcon,
-                    backgroundColor: Colors.white,
-                    borderRadius: 40,
-                    isSvg: true,
-                    borderColor: Colors.grey.shade300,
-                    height: 18,
-                    width: 18,
-                    padding: 8,
-                  ),
-                  const SizedBox(width: 15),
-                  CustomIconContainer(
-                    iconPath: AppIcons.notificationIcon,
-                    backgroundColor: Colors.white,
-                    borderRadius: 40,
-                    isSvg: true,
-                    borderColor: Colors.grey.shade300,
-                    height: 18,
-                    width: 18,
-                    padding: 8,
-                  ),
-                  const SizedBox(width: 15),
-                  CustomIconContainer(
-                    iconPath: AppIcons.settingIcon,
-                    backgroundColor: Colors.white,
-                    borderRadius: 40,
-                    isSvg: true,
-                    borderColor: Colors.grey.shade300,
-                    height: 18,
-                    width: 18,
-                    padding: 8,
-                  ),
-                  const SizedBox(width: 30),
-                  CustomIconContainer(
-                    iconPath: AppImages.doctorProfile,
-                    backgroundColor: Colors.white,
-                    borderRadius: 40,
-                    padding: 0,
-                    borderColor: Colors.grey.shade300,
-                    height: 35,
-                    width: 35,
-                  ),
-                  const SizedBox(width: 6),
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomText(
-                        'Naman Gajera',
-                        fontSize: 12,
-                        height: 0,
-                      ),
-                      CustomText(
-                        'Dentist',
-                        fontSize: 10,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(width: 30),
-                ],
-              ).withPadding(const EdgeInsets.symmetric(vertical: 10)),
-              Expanded(
-                child: child,
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Tooltip(
+              message: 'Chat',
+              child: CustomIconContainer(
+                iconPath: AppIcons.chatIcon,
+                backgroundColor: Colors.white,
+                borderRadius: 40,
+                isSvg: true,
+                borderColor: Colors.grey.shade300,
+                height: 18,
+                width: 18,
+                padding: 8,
               ),
-            ],
-          ), // This will be the current route's widget
-        );
-      },
+            ),
+            const SizedBox(width: 15),
+            Tooltip(
+              message: 'Notification',
+              child: CustomIconContainer(
+                iconPath: AppIcons.notificationIcon,
+                backgroundColor: Colors.white,
+                borderRadius: 40,
+                isSvg: true,
+                borderColor: Colors.grey.shade300,
+                height: 18,
+                width: 18,
+                padding: 8,
+              ),
+            ),
+            const SizedBox(width: 15),
+            Tooltip(
+              message: 'Setting',
+              child: CustomIconContainer(
+                iconPath: AppIcons.settingIcon,
+                backgroundColor: Colors.white,
+                borderRadius: 40,
+                isSvg: true,
+                borderColor: Colors.grey.shade300,
+                height: 18,
+                width: 18,
+                padding: 8,
+              ),
+            ),
+            const SizedBox(width: 30),
+            CustomIconContainer(
+              iconPath: AppImages.doctorProfile,
+              backgroundColor: Colors.white,
+              borderRadius: 40,
+              padding: 0,
+              borderColor: Colors.grey.shade300,
+              height: 35,
+              width: 35,
+            ),
+            const SizedBox(width: 6),
+            const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomText(
+                  'Naman Gajera',
+                  fontSize: 12,
+                  height: 0,
+                ),
+                CustomText(
+                  'Dentist',
+                  fontSize: 10,
+                ),
+              ],
+            ),
+            const SizedBox(width: 30),
+          ],
+        ).withPadding(const EdgeInsets.symmetric(vertical: 10)),
+        Expanded(
+          child: child,
+        ),
+      ],
     );
   }
 }
