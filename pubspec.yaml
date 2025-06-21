@@ -41,6 +41,7 @@ dependencies:
   dropdown_button2: ^2.3.9
   logger: ^2.5.0
   syncfusion_flutter_calendar: ^29.1.38
+  data_table_2: ^2.6.0
 
 dev_dependencies:
   flutter_test:

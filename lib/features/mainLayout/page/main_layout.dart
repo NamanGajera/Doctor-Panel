@@ -5,6 +5,7 @@ import 'package:doctor_panel/features/mainLayout/page/widgets/main_content_view.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/constants/global_keys.dart';
 import '../bloc/main_layout_bloc.dart';
 import 'widgets/side_bar.dart';
 
@@ -24,12 +25,16 @@ class _MainLayoutState extends State<MainLayout> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = context.screenWidth;
-    final isSmallScreen = screenWidth < 1800;
+    final isSmallScreen = screenWidth < 1100;
     log('screenWidth----->>>> $screenWidth');
     return Scaffold(
+      key: mainLayoutScaffodKey,
+      drawer: const Drawer(
+        child: SideBar(),
+      ),
       body: Row(
         children: [
-          const SideBar(),
+          if (!isSmallScreen) const SideBar(),
           BlocBuilder<MainLayoutBloc, MainLayoutState>(
             builder: (context, state) {
               return Expanded(

@@ -1,9 +1,9 @@
+import 'package:doctor_panel/core/constants/global_keys.dart';
 import 'package:doctor_panel/core/constants/icons.dart';
 import 'package:doctor_panel/core/constants/images.dart';
 import 'package:doctor_panel/core/constants/widgets.dart';
 import 'package:doctor_panel/core/extension/bloc_event_call_extenstion.dart';
 import 'package:doctor_panel/core/extension/build_context_extenstion.dart';
-import 'package:doctor_panel/core/extension/size_extension.dart';
 import 'package:doctor_panel/features/mainLayout/bloc/main_layout_bloc.dart';
 import 'package:doctor_panel/routers/route_names.dart';
 import 'package:doctor_panel/routers/router.dart';
@@ -57,13 +57,13 @@ class _SideBarState extends State<SideBar> {
   Widget build(BuildContext context) {
     // Check if the screen width is small
     final screenWidth = context.screenWidth;
-    final isSmallScreen = screenWidth < 950;
+    final isSmallScreen = screenWidth < 1100;
 
     return BlocBuilder<MainLayoutBloc, MainLayoutState>(
       builder: (context, state) {
-        if (isSmallScreen && state.isExpanded) {
-          context.addMainLayoutEvent(ExpandSideBarEvent(isExpand: false));
-        }
+        // if (isSmallScreen && state.isExpanded) {
+        //   context.addMainLayoutEvent(ExpandSideBarEvent(isExpand: false));
+        // }
 
         return Expanded(
           flex: state.isExpanded ? 2 : 1,
@@ -120,8 +120,12 @@ class _SideBarState extends State<SideBar> {
                       // Toggle button using a custom container instead of IconButton
                       GestureDetector(
                         onTap: () {
-                          context.addMainLayoutEvent(
-                              ExpandSideBarEvent(isExpand: !state.isExpanded));
+                          if (!isSmallScreen) {
+                            context.addMainLayoutEvent(ExpandSideBarEvent(
+                                isExpand: !state.isExpanded));
+                          } else {
+                            mainLayoutScaffodKey.currentState?.closeDrawer();
+                          }
                         },
                         child: MouseRegion(
                           cursor: SystemMouseCursors.click,
@@ -162,78 +166,81 @@ class _SideBarState extends State<SideBar> {
                       final isSelected = state.selectedIndex == index;
                       final isHovered = state.hoveredIndex == index;
 
-                      return MouseRegion(
-                        onEnter: (_) {
-                          context.addMainLayoutEvent(
-                              HoveredMenuEvent(hoveredIndex: index));
-                        },
-                        onExit: (_) {
-                          context.addMainLayoutEvent(
-                              HoveredMenuEvent(hoveredIndex: -1));
-                        },
-                        cursor: SystemMouseCursors.click,
-                        child: GestureDetector(
-                          onTap: () {
+                      return Tooltip(
+                        message: state.isExpanded ? '' : sideBarMenuName[index],
+                        child: MouseRegion(
+                          onEnter: (_) {
                             context.addMainLayoutEvent(
-                                ChangeMenuEvent(selectedIndex: index));
-                            appRouter.goNamed(routeNames[index]);
+                                HoveredMenuEvent(hoveredIndex: index));
                           },
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 200),
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 4),
-                            width: double.infinity,
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: state.isExpanded ? 12 : 15,
-                            ),
-                            decoration: BoxDecoration(
-                              color: isSelected
-                                  ? primaryDarkBlueColor
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(
-                                color: isHovered && !isSelected
-                                    ? primaryDarkBlueColor.withValues(
-                                        alpha: 0.5)
-                                    : isSelected
-                                        ? primaryDarkBlueColor
-                                        : Colors.transparent,
+                          onExit: (_) {
+                            context.addMainLayoutEvent(
+                                HoveredMenuEvent(hoveredIndex: -1));
+                          },
+                          cursor: SystemMouseCursors.click,
+                          child: GestureDetector(
+                            onTap: () {
+                              context.addMainLayoutEvent(
+                                  ChangeMenuEvent(selectedIndex: index));
+                              appRouter.goNamed(routeNames[index]);
+                            },
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 200),
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 4),
+                              width: double.infinity,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: state.isExpanded ? 12 : 15,
                               ),
-                            ),
-                            transform: isHovered && !isSelected
-                                ? (Matrix4.identity()..scale(1.03))
-                                : Matrix4.identity(),
-                            child: Row(
-                              mainAxisAlignment: state.isExpanded
-                                  ? MainAxisAlignment.start
-                                  : MainAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(
-                                  sideBarMenuIcons[index],
-                                  color: isSelected
-                                      ? Colors.white
-                                      : Colors.black54,
-                                  height: 20,
-                                  width: 20,
+                              decoration: BoxDecoration(
+                                color: isSelected
+                                    ? primaryDarkBlueColor
+                                    : Colors.transparent,
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  color: isHovered && !isSelected
+                                      ? primaryDarkBlueColor.withValues(
+                                          alpha: 0.5)
+                                      : isSelected
+                                          ? primaryDarkBlueColor
+                                          : Colors.transparent,
                                 ),
-                                if (state.isExpanded) ...[
-                                  const SizedBox(width: 10),
-                                  Expanded(
-                                    child: CustomText(
-                                      sideBarMenuName[index],
-                                      style: TextStyle(
-                                        color: isSelected
-                                            ? Colors.white
-                                            : Colors.black87,
-                                        fontWeight: isSelected || isHovered
-                                            ? FontWeight.w500
-                                            : FontWeight.normal,
+                              ),
+                              transform: isHovered && !isSelected
+                                  ? (Matrix4.identity()..scale(1.03))
+                                  : Matrix4.identity(),
+                              child: Row(
+                                mainAxisAlignment: state.isExpanded
+                                    ? MainAxisAlignment.start
+                                    : MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(
+                                    sideBarMenuIcons[index],
+                                    color: isSelected
+                                        ? Colors.white
+                                        : Colors.black54,
+                                    height: 20,
+                                    width: 20,
+                                  ),
+                                  if (state.isExpanded) ...[
+                                    const SizedBox(width: 10),
+                                    Expanded(
+                                      child: CustomText(
+                                        sideBarMenuName[index],
+                                        style: TextStyle(
+                                          color: isSelected
+                                              ? Colors.white
+                                              : Colors.black87,
+                                          fontWeight: isSelected || isHovered
+                                              ? FontWeight.w500
+                                              : FontWeight.normal,
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                  ],
                                 ],
-                              ],
+                              ),
                             ),
                           ),
                         ),
