@@ -14,7 +14,8 @@ class SignUpForm extends StatefulWidget {
 class _SignUpFormState extends State<SignUpForm> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +44,8 @@ class _SignUpFormState extends State<SignUpForm> {
             const Expanded(child: Divider()),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: CustomText.labelSmall('or', style: const TextStyle(color: Colors.grey)),
+              child: CustomText.labelSmall('or',
+                  style: const TextStyle(color: Colors.grey)),
             ),
             const Expanded(child: Divider()),
           ],
@@ -155,7 +157,7 @@ class _SignUpFormState extends State<SignUpForm> {
       child: Container(
         height: context.screenHeight * 0.045,
         decoration: BoxDecoration(
-          border: Border.all(color: primaryBlueColor.withOpacity(0.3)),
+          border: Border.all(color: primaryBlueColor.withValues(alpha: 0.3)),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Center(

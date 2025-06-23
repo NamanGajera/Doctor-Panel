@@ -20,13 +20,19 @@ class _AuthPageState extends State<AuthPage> {
   @override
   Widget build(BuildContext context) {
     final bool isWideScreen = context.screenWidth > 900;
-    final bool isMediumScreen = context.screenWidth > 600 && context.screenWidth <= 900;
+    final bool isMediumScreen =
+        context.screenWidth > 600 && context.screenWidth <= 900;
 
     return Scaffold(
-      backgroundColor: const Color(0xff0A4D68), // Teal background color as shown in your image
+      backgroundColor: const Color(
+          0xff0A4D68), // Teal background color as shown in your image
       body: Center(
         child: Container(
-          width: isWideScreen ? context.screenWidth * 0.85 : (isMediumScreen ? context.screenWidth * 0.9 : context.screenWidth * 0.95),
+          width: isWideScreen
+              ? context.screenWidth * 0.85
+              : (isMediumScreen
+                  ? context.screenWidth * 0.9
+                  : context.screenWidth * 0.95),
           height: isWideScreen ? context.screenHeight * 0.95 : null,
           margin: const EdgeInsets.symmetric(vertical: 20),
           decoration: BoxDecoration(
@@ -34,13 +40,15 @@ class _AuthPageState extends State<AuthPage> {
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.1),
+                color: Colors.black.withValues(alpha: 0.1),
                 blurRadius: 20,
                 spreadRadius: 5,
               ),
             ],
           ),
-          child: isWideScreen ? _buildWideLayout(context) : _buildNarrowLayout(context),
+          child: isWideScreen
+              ? _buildWideLayout(context)
+              : _buildNarrowLayout(context),
         ),
       ),
     );
@@ -93,20 +101,23 @@ class _AuthPageState extends State<AuthPage> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        context.read<AuthBloc>().add(ToggleLoginAndSignUpPageEvent(isLoginPage: true));
+                        context.read<AuthBloc>().add(
+                            ToggleLoginAndSignUpPageEvent(isLoginPage: true));
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          color: state.isLoginPage ? Colors.black : Colors.white,
+                          color:
+                              state.isLoginPage ? Colors.black : Colors.white,
                           border: Border.all(color: Colors.black),
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: CustomText.bodyLarge(
                           'Login',
                           fontSize: 16,
-                          color: state.isLoginPage ? Colors.white : Colors.black,
+                          color:
+                              state.isLoginPage ? Colors.white : Colors.black,
                         ),
                       ),
                     ),
@@ -115,20 +126,23 @@ class _AuthPageState extends State<AuthPage> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        context.read<AuthBloc>().add(ToggleLoginAndSignUpPageEvent(isLoginPage: false));
+                        context.read<AuthBloc>().add(
+                            ToggleLoginAndSignUpPageEvent(isLoginPage: false));
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          color: state.isLoginPage ? Colors.white : Colors.black,
+                          color:
+                              state.isLoginPage ? Colors.white : Colors.black,
                           border: Border.all(color: Colors.black),
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: CustomText.bodyLarge(
                           'Sign Up',
                           fontSize: 16,
-                          color: state.isLoginPage ? Colors.black : Colors.white,
+                          color:
+                              state.isLoginPage ? Colors.black : Colors.white,
                         ),
                       ),
                     ),

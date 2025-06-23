@@ -44,7 +44,8 @@ class _LoginFormState extends State<LoginForm> {
             const Expanded(child: Divider()),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: CustomText.labelSmall('or', style: const TextStyle(color: Colors.grey)),
+              child: CustomText.labelSmall('or',
+                  style: const TextStyle(color: Colors.grey)),
             ),
             const Expanded(child: Divider()),
           ],
@@ -131,7 +132,7 @@ class _LoginFormState extends State<LoginForm> {
       child: Container(
         height: context.screenHeight * 0.045,
         decoration: BoxDecoration(
-          border: Border.all(color: primaryBlueColor.withOpacity(0.3)),
+          border: Border.all(color: primaryBlueColor.withValues(alpha: 0.3)),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Center(

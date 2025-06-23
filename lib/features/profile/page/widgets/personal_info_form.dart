@@ -21,7 +21,8 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _mobileNumberController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _alternativeNumberController = TextEditingController();
+  final TextEditingController _alternativeNumberController =
+      TextEditingController();
   final TextEditingController _birthDateController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
 
@@ -40,7 +41,8 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
         final birthDate = DateTime.parse(_birthDateController.text);
         final today = DateTime.now();
         int age = today.year - birthDate.year;
-        if (today.month < birthDate.month || (today.month == birthDate.month && today.day < birthDate.day)) {
+        if (today.month < birthDate.month ||
+            (today.month == birthDate.month && today.day < birthDate.day)) {
           age--;
         }
         _ageController.text = age.toString();
@@ -64,7 +66,7 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
                 border: Border.all(color: Colors.grey.shade200),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.03),
+                    color: Colors.black.withValues(alpha: 0.03),
                     blurRadius: 10,
                     spreadRadius: 1,
                   ),
@@ -98,7 +100,7 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
                 border: Border.all(color: Colors.grey.shade200),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.03),
+                    color: Colors.black.withValues(alpha: 0.03),
                     blurRadius: 10,
                     spreadRadius: 1,
                   ),
@@ -138,7 +140,7 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
                 border: Border.all(color: Colors.grey.shade200),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.03),
+                    color: Colors.black.withValues(alpha: 0.03),
                     blurRadius: 10,
                     spreadRadius: 1,
                   ),
@@ -177,7 +179,7 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
+                        color: Colors.grey.withValues(alpha: 0.2),
                         spreadRadius: 1,
                         blurRadius: 3,
                         offset: const Offset(0, 1),
@@ -189,7 +191,8 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
                       // Reset form
                     },
                     style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 15),
                       backgroundColor: Colors.white,
                       side: const BorderSide(color: primaryBlueColor),
                       foregroundColor: primaryBlueColor,
@@ -209,7 +212,7 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: primaryBlueColor.withOpacity(0.3),
+                        color: primaryBlueColor.withValues(alpha: 0.3),
                         spreadRadius: 1,
                         blurRadius: 3,
                         offset: const Offset(0, 1),
@@ -221,7 +224,8 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
                       // Save form
                     },
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 15),
                       backgroundColor: primaryBlueColor,
                       foregroundColor: Colors.white,
                     ),
@@ -256,12 +260,12 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
               end: Alignment.bottomCenter,
             ),
             border: Border.all(
-              color: primaryBlueColor.withOpacity(0.3),
+              color: primaryBlueColor.withValues(alpha: 0.3),
               width: 4,
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.1),
+                color: Colors.black.withValues(alpha: 0.1),
                 blurRadius: 10,
                 spreadRadius: 1,
               ),
@@ -322,7 +326,8 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
         const SizedBox(height: 16),
         TextButton.icon(
           onPressed: _pickImage,
-          icon: const Icon(Icons.cloud_upload, color: primaryBlueColor, size: 20),
+          icon:
+              const Icon(Icons.cloud_upload, color: primaryBlueColor, size: 20),
           label: const Text(
             'Upload Photo',
             style: TextStyle(
@@ -420,13 +425,16 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
                         final result = await CustomDatePicker.pick(
                           context: context,
                           mode: DatePickerModeEnum.date,
-                          initialDate: DateTime.now().subtract(const Duration(days: 365 * 25)),
-                          firstDate: DateTime.now().subtract(const Duration(days: 365 * 100)),
+                          initialDate: DateTime.now()
+                              .subtract(const Duration(days: 365 * 25)),
+                          firstDate: DateTime.now()
+                              .subtract(const Duration(days: 365 * 100)),
                           lastDate: DateTime.now(),
                         );
                         if (result != null) {
                           setState(() {
-                            _birthDateController.text = result.toString().split(' ')[0];
+                            _birthDateController.text =
+                                result.toString().split(' ')[0];
                             _calculateAge();
                           });
                         }
@@ -510,13 +518,16 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
                       final result = await CustomDatePicker.pick(
                         context: context,
                         mode: DatePickerModeEnum.date,
-                        initialDate: DateTime.now().subtract(const Duration(days: 365 * 25)),
-                        firstDate: DateTime.now().subtract(const Duration(days: 365 * 100)),
+                        initialDate: DateTime.now()
+                            .subtract(const Duration(days: 365 * 25)),
+                        firstDate: DateTime.now()
+                            .subtract(const Duration(days: 365 * 100)),
                         lastDate: DateTime.now(),
                       );
                       if (result != null) {
                         setState(() {
-                          _birthDateController.text = result.toString().split(' ')[0];
+                          _birthDateController.text =
+                              result.toString().split(' ')[0];
                           _calculateAge();
                         });
                       }

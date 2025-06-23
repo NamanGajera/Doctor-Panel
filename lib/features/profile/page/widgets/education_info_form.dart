@@ -15,10 +15,14 @@ class EducationInfoForm extends StatefulWidget {
 }
 
 class _EducationInfoFormState extends State<EducationInfoForm> {
-  final TextEditingController _highestQualificationController = TextEditingController();
-  final TextEditingController _universityCollegeNameController = TextEditingController();
-  final TextEditingController _yearCompletionController = TextEditingController();
-  final TextEditingController _medicalCouncilRegistrationNoController = TextEditingController();
+  final TextEditingController _highestQualificationController =
+      TextEditingController();
+  final TextEditingController _universityCollegeNameController =
+      TextEditingController();
+  final TextEditingController _yearCompletionController =
+      TextEditingController();
+  final TextEditingController _medicalCouncilRegistrationNoController =
+      TextEditingController();
 
   File? _profileImage;
   bool get hasProfileImage => _profileImage != null;
@@ -56,7 +60,7 @@ class _EducationInfoFormState extends State<EducationInfoForm> {
                 border: Border.all(color: Colors.grey.shade200),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.03),
+                    color: Colors.black.withValues(alpha: 0.03),
                     blurRadius: 10,
                     spreadRadius: 1,
                   ),
@@ -96,7 +100,7 @@ class _EducationInfoFormState extends State<EducationInfoForm> {
                 border: Border.all(color: Colors.grey.shade200),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.03),
+                    color: Colors.black.withValues(alpha: 0.03),
                     blurRadius: 10,
                     spreadRadius: 1,
                   ),
@@ -119,7 +123,8 @@ class _EducationInfoFormState extends State<EducationInfoForm> {
                     ],
                   ),
                   const SizedBox(height: 24),
-                  _buildMedicalCouncilRegistrationDetails(constraints.isWideScreen),
+                  _buildMedicalCouncilRegistrationDetails(
+                      constraints.isWideScreen),
                 ],
               ),
             ),
@@ -135,7 +140,7 @@ class _EducationInfoFormState extends State<EducationInfoForm> {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
+                        color: Colors.grey.withValues(alpha: 0.2),
                         spreadRadius: 1,
                         blurRadius: 3,
                         offset: const Offset(0, 1),
@@ -147,7 +152,8 @@ class _EducationInfoFormState extends State<EducationInfoForm> {
                       // Reset form
                     },
                     style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 15),
                       backgroundColor: Colors.white,
                       side: const BorderSide(color: primaryBlueColor),
                       foregroundColor: primaryBlueColor,
@@ -167,7 +173,7 @@ class _EducationInfoFormState extends State<EducationInfoForm> {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: primaryBlueColor.withOpacity(0.3),
+                        color: primaryBlueColor.withValues(alpha: 0.3),
                         spreadRadius: 1,
                         blurRadius: 3,
                         offset: const Offset(0, 1),
@@ -179,7 +185,8 @@ class _EducationInfoFormState extends State<EducationInfoForm> {
                       // Save form
                     },
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 15),
                       backgroundColor: primaryBlueColor,
                       foregroundColor: Colors.white,
                     ),

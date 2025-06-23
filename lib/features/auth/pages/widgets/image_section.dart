@@ -26,7 +26,7 @@ class _ImageSectionState extends State<ImageSection> {
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
                   colors: [
-                    const Color(0xff0165fc).withOpacity(0.7),
+                    const Color(0xff0165fc).withValues(alpha: 0.7),
                     const Color(0xff0A4D68),
                   ],
                 ),
@@ -43,7 +43,7 @@ class _ImageSectionState extends State<ImageSection> {
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
                     colors: [
-                      const Color(0xff0165fc).withOpacity(0.7),
+                      const Color(0xff0165fc).withValues(alpha: 0.7),
                       const Color(0xff0A4D68),
                     ],
                   ),
@@ -52,7 +52,7 @@ class _ImageSectionState extends State<ImageSection> {
                   child: Icon(
                     Icons.landscape,
                     size: 80,
-                    color: Colors.white.withOpacity(0.7),
+                    color: Colors.white.withValues(alpha: 0.7),
                   ),
                 ),
               );

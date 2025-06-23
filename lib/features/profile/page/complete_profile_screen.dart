@@ -76,7 +76,10 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
               return Column(
                 children: [
                   // Side tabs for desktop view, top tabs for mobile
-                  if (isDesktop) _buildDesktopLayout(state, context) else _buildMobileLayout(state, context),
+                  if (isDesktop)
+                    _buildDesktopLayout(state, context)
+                  else
+                    _buildMobileLayout(state, context),
                 ],
               );
             },
@@ -97,7 +100,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
+                  color: Colors.black.withValues(alpha: 0.05),
                   blurRadius: 5,
                   offset: const Offset(0, 3),
                 ),
@@ -119,7 +122,9 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
             child: PageView(
               controller: _pageController,
               physics: const NeverScrollableScrollPhysics(),
-              children: _steps.map((step) => _buildDesktopFormContainer(step['form'])).toList(),
+              children: _steps
+                  .map((step) => _buildDesktopFormContainer(step['form']))
+                  .toList(),
             ),
           ),
         ],
@@ -137,7 +142,9 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
             child: PageView(
               controller: _pageController,
               physics: const NeverScrollableScrollPhysics(),
-              children: _steps.map((step) => _buildMobileFormContainer(step['form'])).toList(),
+              children: _steps
+                  .map((step) => _buildMobileFormContainer(step['form']))
+                  .toList(),
             ),
           ),
           _buildMobileNavButtons(state, context),
@@ -167,7 +174,9 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
               Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: isActive ? primaryDarkBlueColor : (isCompleted ? Colors.green : Colors.grey[300]),
+                  color: isActive
+                      ? primaryDarkBlueColor
+                      : (isCompleted ? Colors.green : Colors.grey[300]),
                 ),
                 padding: const EdgeInsets.all(6),
                 margin: const EdgeInsets.symmetric(horizontal: 4),
@@ -190,7 +199,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
     );
   }
 
-  List<Widget> _buildSideNavItems(ProfileScreenState state, BuildContext context) {
+  List<Widget> _buildSideNavItems(
+      ProfileScreenState state, BuildContext context) {
     return List.generate(_steps.length, (index) {
       final bool isActive = index == state.stepIndex;
       final bool isCompleted = index < state.stepIndex;
@@ -198,7 +208,9 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
       return InkWell(
         onTap: () {
           if (index <= state.stepIndex || index == state.stepIndex + 1) {
-            context.read<ProfileScreenBloc>().add(ChangeStepperEvent(index: index));
+            context
+                .read<ProfileScreenBloc>()
+                .add(ChangeStepperEvent(index: index));
           } else {
             _showStepWarning(context);
           }
@@ -207,16 +219,22 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
           margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
           decoration: BoxDecoration(
-            color: isActive ? primaryDarkBlueColor.withOpacity(0.1) : Colors.transparent,
+            color: isActive
+                ? primaryDarkBlueColor.withValues(alpha: 0.1)
+                : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
-            border: isActive ? Border.all(color: primaryDarkBlueColor, width: 1) : null,
+            border: isActive
+                ? Border.all(color: primaryDarkBlueColor, width: 1)
+                : null,
           ),
           child: Row(
             children: [
               Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: isActive ? primaryDarkBlueColor : (isCompleted ? Colors.green : Colors.grey[300]),
+                  color: isActive
+                      ? primaryDarkBlueColor
+                      : (isCompleted ? Colors.green : Colors.grey[300]),
                 ),
                 padding: const EdgeInsets.all(8),
                 child: Icon(
@@ -233,7 +251,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                     Text(
                       _steps[index]['title'],
                       style: TextStyle(
-                        fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+                        fontWeight:
+                            isActive ? FontWeight.bold : FontWeight.normal,
                         color: isActive ? primaryDarkBlueColor : Colors.black87,
                         fontSize: 16,
                       ),
@@ -310,7 +329,9 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   gradient: LinearGradient(
                     colors: [
                       primaryDarkBlueColor,
-                      progress == 1.0 ? Colors.green : primaryDarkBlueColor.withOpacity(0.7),
+                      progress == 1.0
+                          ? Colors.green
+                          : primaryDarkBlueColor.withValues(alpha: 0.7),
                     ],
                   ),
                 ),
@@ -331,7 +352,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 10,
               spreadRadius: 1,
             ),
@@ -352,7 +373,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 5,
             ),
           ],
@@ -364,7 +385,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
     );
   }
 
-  Widget _buildDesktopNavButtons(ProfileScreenState state, BuildContext context) {
+  Widget _buildDesktopNavButtons(
+      ProfileScreenState state, BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(24),
       child: Row(
@@ -380,7 +402,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
               icon: const Icon(Icons.arrow_back),
               label: const Text('Back'),
               style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 side: const BorderSide(color: primaryDarkBlueColor),
                 foregroundColor: primaryDarkBlueColor,
               ),
@@ -397,10 +420,16 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                 _showCompletionDialog(context);
               }
             },
-            icon: Icon(state.stepIndex < _steps.length - 1 ? Icons.arrow_forward : Icons.check),
-            label: Text(state.stepIndex < _steps.length - 1 ? 'Continue' : 'Submit Profile'),
+            icon: Icon(state.stepIndex < _steps.length - 1
+                ? Icons.arrow_forward
+                : Icons.check),
+            label: Text(state.stepIndex < _steps.length - 1
+                ? 'Continue'
+                : 'Submit Profile'),
             style: ElevatedButton.styleFrom(
-              backgroundColor: state.stepIndex < _steps.length - 1 ? primaryDarkBlueColor : Colors.green,
+              backgroundColor: state.stepIndex < _steps.length - 1
+                  ? primaryDarkBlueColor
+                  : Colors.green,
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               elevation: 0,
             ),
@@ -410,14 +439,15 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
     );
   }
 
-  Widget _buildMobileNavButtons(ProfileScreenState state, BuildContext context) {
+  Widget _buildMobileNavButtons(
+      ProfileScreenState state, BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 5,
             offset: const Offset(0, -3),
           ),
@@ -452,7 +482,9 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
               }
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: state.stepIndex < _steps.length - 1 ? primaryDarkBlueColor : Colors.green,
+              backgroundColor: state.stepIndex < _steps.length - 1
+                  ? primaryDarkBlueColor
+                  : Colors.green,
               elevation: 0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
@@ -493,7 +525,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.green.withOpacity(0.1),
+                  color: Colors.green.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(
@@ -526,7 +558,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   OutlinedButton(
                     onPressed: () => Navigator.of(context).pop(),
                     style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 12),
                     ),
                     child: const Text('Close'),
                   ),
@@ -538,7 +571,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primaryDarkBlueColor,
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24, vertical: 12),
                     ),
                     child: const Text('Go to Dashboard'),
                   ),

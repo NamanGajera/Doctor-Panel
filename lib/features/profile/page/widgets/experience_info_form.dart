@@ -14,17 +14,23 @@ class ExperienceInfoForm extends StatefulWidget {
 
 class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
   // Current Professional Details controllers
-  final TextEditingController _currentJobTitleController = TextEditingController();
-  final TextEditingController _currentHospitalClinicNameController = TextEditingController();
-  final TextEditingController _experienceYearsController = TextEditingController();
+  final TextEditingController _currentJobTitleController =
+      TextEditingController();
+  final TextEditingController _currentHospitalClinicNameController =
+      TextEditingController();
+  final TextEditingController _experienceYearsController =
+      TextEditingController();
   final TextEditingController _specialtyController = TextEditingController();
 
   // Previous Experience controllers
-  final TextEditingController _previousJobTitleController = TextEditingController();
-  final TextEditingController _previousHospitalClinicController = TextEditingController();
+  final TextEditingController _previousJobTitleController =
+      TextEditingController();
+  final TextEditingController _previousHospitalClinicController =
+      TextEditingController();
   final TextEditingController _startDateController = TextEditingController();
   final TextEditingController _endDateController = TextEditingController();
-  final TextEditingController _responsibilitiesController = TextEditingController();
+  final TextEditingController _responsibilitiesController =
+      TextEditingController();
 
   // Certificate Upload related state
   List<String> certificates = [];
@@ -80,7 +86,7 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
+                        color: Colors.grey.withValues(alpha: 0.2),
                         spreadRadius: 1,
                         blurRadius: 3,
                         offset: const Offset(0, 1),
@@ -93,7 +99,8 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
                       _resetForm();
                     },
                     style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 15),
                       backgroundColor: Colors.white,
                       side: const BorderSide(color: primaryBlueColor),
                       foregroundColor: primaryBlueColor,
@@ -113,7 +120,7 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: primaryBlueColor.withOpacity(0.3),
+                        color: primaryBlueColor.withValues(alpha: 0.3),
                         spreadRadius: 1,
                         blurRadius: 3,
                         offset: const Offset(0, 1),
@@ -126,7 +133,8 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
                       _saveForm();
                     },
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 15),
                       backgroundColor: primaryBlueColor,
                       foregroundColor: Colors.white,
                     ),
@@ -159,7 +167,7 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
         border: Border.all(color: Colors.grey.shade200),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.03),
+            color: Colors.black.withValues(alpha: 0.03),
             blurRadius: 10,
             spreadRadius: 1,
           ),
@@ -311,7 +319,8 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
         DropdownButtonFormField<String>(
           decoration: InputDecoration(
             labelText: 'Qualification Type',
-            prefixIcon: const Icon(Icons.school, color: primaryBlueColor, size: 20),
+            prefixIcon:
+                const Icon(Icons.school, color: primaryBlueColor, size: 20),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(color: Colors.grey.shade300),
@@ -345,7 +354,8 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
         DropdownButtonFormField<String>(
           decoration: InputDecoration(
             labelText: 'Registration Council',
-            prefixIcon: const Icon(Icons.account_balance, color: primaryBlueColor, size: 20),
+            prefixIcon: const Icon(Icons.account_balance,
+                color: primaryBlueColor, size: 20),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(color: Colors.grey.shade300),
@@ -367,9 +377,12 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
             });
           },
           items: const [
-            DropdownMenuItem(value: 'MCI', child: Text('Medical Council of India (MCI)')),
-            DropdownMenuItem(value: 'SMC', child: Text('State Medical Council (SMC)')),
-            DropdownMenuItem(value: 'NMC', child: Text('National Medical Commission (NMC)')),
+            DropdownMenuItem(
+                value: 'MCI', child: Text('Medical Council of India (MCI)')),
+            DropdownMenuItem(
+                value: 'SMC', child: Text('State Medical Council (SMC)')),
+            DropdownMenuItem(
+                value: 'NMC', child: Text('National Medical Commission (NMC)')),
             DropdownMenuItem(value: 'Other', child: Text('Other')),
           ],
         ),
@@ -425,7 +438,8 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
                         style: TextStyle(color: Colors.grey.shade700),
                       ),
                       const SizedBox(height: 8),
-                      if (exp['responsibilities'] != null && exp['responsibilities']!.isNotEmpty)
+                      if (exp['responsibilities'] != null &&
+                          exp['responsibilities']!.isNotEmpty)
                         Text(
                           'Responsibilities: ${exp['responsibilities']}',
                           style: TextStyle(color: Colors.grey.shade800),
@@ -531,7 +545,8 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
                         );
                         if (picked != null) {
                           setState(() {
-                            _startDateController.text = DateFormat('dd/MM/yyyy').format(picked);
+                            _startDateController.text =
+                                DateFormat('dd/MM/yyyy').format(picked);
                           });
                         }
                       },
@@ -558,7 +573,8 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
                         );
                         if (picked != null) {
                           setState(() {
-                            _endDateController.text = DateFormat('dd/MM/yyyy').format(picked);
+                            _endDateController.text =
+                                DateFormat('dd/MM/yyyy').format(picked);
                           });
                         }
                       },
@@ -588,7 +604,8 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
                       );
                       if (picked != null) {
                         setState(() {
-                          _startDateController.text = DateFormat('dd/MM/yyyy').format(picked);
+                          _startDateController.text =
+                              DateFormat('dd/MM/yyyy').format(picked);
                         });
                       }
                     },
@@ -613,7 +630,8 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
                       );
                       if (picked != null) {
                         setState(() {
-                          _endDateController.text = DateFormat('dd/MM/yyyy').format(picked);
+                          _endDateController.text =
+                              DateFormat('dd/MM/yyyy').format(picked);
                         });
                       }
                     },
@@ -640,7 +658,8 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
                 icon: const Icon(Icons.add),
                 label: const Text('Add Experience'),
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                   backgroundColor: primaryBlueColor,
                   foregroundColor: Colors.white,
                 ),
@@ -661,7 +680,7 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: Colors.blue.withOpacity(0.1),
+            color: Colors.blue.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(8),
           ),
           child: const Column(
@@ -750,7 +769,8 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
             _buildUploadCard(
               title: 'Medical Registration Certificate',
               icon: Icons.card_membership,
-              onUpload: () => _uploadCertificate('Medical Registration Certificate'),
+              onUpload: () =>
+                  _uploadCertificate('Medical Registration Certificate'),
             ),
             _buildUploadCard(
               title: 'Specialty/Additional Certificates',
@@ -807,7 +827,9 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
 
   // Methods for actions
   void _addPreviousExperience() {
-    if (_previousJobTitleController.text.isEmpty || _previousHospitalClinicController.text.isEmpty || _startDateController.text.isEmpty) {
+    if (_previousJobTitleController.text.isEmpty ||
+        _previousHospitalClinicController.text.isEmpty ||
+        _startDateController.text.isEmpty) {
       // Show validation error
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -823,7 +845,9 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
         'jobTitle': _previousJobTitleController.text,
         'hospital': _previousHospitalClinicController.text,
         'startDate': _startDateController.text,
-        'endDate': _endDateController.text.isEmpty ? 'Present' : _endDateController.text,
+        'endDate': _endDateController.text.isEmpty
+            ? 'Present'
+            : _endDateController.text,
         'responsibilities': _responsibilitiesController.text,
       });
 
@@ -854,7 +878,8 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
     Future.delayed(const Duration(seconds: 1), () {
       setState(() {
         isUploading = false;
-        certificates.add('$certificateType-${DateTime.now().millisecondsSinceEpoch}.pdf');
+        certificates.add(
+            '$certificateType-${DateTime.now().millisecondsSinceEpoch}.pdf');
       });
 
       // Show success message
@@ -907,7 +932,8 @@ class _ExperienceInfoFormState extends State<ExperienceInfoForm> {
         _registrationCouncil == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Please fill in all required fields in Current Professional Details'),
+          content: Text(
+              'Please fill in all required fields in Current Professional Details'),
           backgroundColor: Colors.red,
         ),
       );

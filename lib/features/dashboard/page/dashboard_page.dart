@@ -1,7 +1,9 @@
+import 'package:doctor_panel/core/extension/build_context_extenstion.dart';
 import 'package:doctor_panel/features/dashboard/page/widget/appointment_card.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/icons.dart';
+import '../models/appointment_card_data_model.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -11,6 +13,42 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
+  List<AppointmentCardDataModel> appointmentCardData = [
+    AppointmentCardDataModel(
+      title: 'Total Appointments',
+      subTitle: 'Includes confirmed & pending',
+      appointmentCount: 42,
+      iconPath: AppIcons.personIcon,
+      cardColor: const Color(0xFFECEAFF),
+      showMoreButton: false,
+      appointmentChangePercent: 8,
+    ),
+    AppointmentCardDataModel(
+      title: 'Upcoming Today',
+      subTitle: 'Next: Sarah Johnson at 10:30',
+      appointmentCount: 12,
+      iconPath: AppIcons.calendarIcon,
+      cardColor: const Color(0xFFE6F7FF),
+      showMoreButton: true,
+    ),
+    AppointmentCardDataModel(
+      title: 'Pending Approvals',
+      subTitle: 'Requires your confirmation',
+      appointmentCount: 7,
+      iconPath: AppIcons.clockIcon,
+      cardColor: const Color(0xFFFFF4E6),
+      showMoreButton: true,
+    ),
+    AppointmentCardDataModel(
+      title: 'Completed Session',
+      subTitle: 'This week\'s consultations',
+      appointmentCount: 23,
+      iconPath: AppIcons.checkMarkIcon,
+      cardColor: const Color(0xFFd6e4e5),
+      showMoreButton: true,
+      appointmentChangePercent: 15,
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -19,59 +57,37 @@ class _DashboardPageState extends State<DashboardPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Row(
-              children: [
-                Expanded(
-                  child: AppointmentCard(
-                    title: 'Total Appointments',
-                    subtitle: 'Includes confirmed & pending',
-                    value: '42',
-                    iconPath: AppIcons.personIcon,
-                    iconBackgroundColor: Colors.white,
-                    cardColor: Color(0xFFECEAFF),
-                    trendValue: '+8% vs last week',
-                    trendPositive: true,
-                  ),
-                ),
-                SizedBox(width: 16),
-                Expanded(
-                  child: AppointmentCard(
-                    title: 'Upcoming Today',
-                    subtitle: 'Next: Sarah Johnson at 10:30',
-                    value: '12',
-                    iconPath: AppIcons.calendarIcon,
-                    iconBackgroundColor: Colors.white,
-                    cardColor: Color(0xFFE6F7FF),
-                    showMoreButton: true,
-                  ),
-                ),
-                SizedBox(width: 16),
-                Expanded(
-                  child: AppointmentCard(
-                    title: 'Pending Approvals',
-                    subtitle: 'Requires your confirmation',
-                    value: '7',
-                    iconPath: AppIcons.clockIcon,
-                    iconBackgroundColor: Colors.white,
-                    cardColor: Color(0xFFFFF4E6),
-                    showMoreButton: true,
-                    urgent: true,
-                  ),
-                ),
-                SizedBox(width: 16),
-                Expanded(
-                  child: AppointmentCard(
-                    title: 'Completed Sessions',
-                    subtitle: 'This week\'s consultations',
-                    value: '23',
-                    iconPath: AppIcons.checkMarkIcon,
-                    iconBackgroundColor: Colors.white,
-                    cardColor: Color(0xFFd6e4e5),
-                    trendValue: '+15% vs last week',
-                    trendPositive: true,
-                  ),
-                ),
-              ],
+            GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: context.screenWidth < 370
+                    ? 1
+                    : context.screenWidth < 760
+                        ? 2
+                        : 4,
+                mainAxisExtent: 170,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+              ),
+              itemCount: appointmentCardData.length,
+              itemBuilder: (context, index) {
+                final AppointmentCardDataModel cardData =
+                    appointmentCardData[index];
+                return AppointmentCard(
+                  title: cardData.title ?? '-',
+                  subtitle: cardData.subTitle ?? '-',
+                  value: '${cardData.appointmentCount ?? 0}',
+                  iconPath: cardData.iconPath ?? '-',
+                  iconBackgroundColor: Colors.white,
+                  cardColor: cardData.cardColor ?? Colors.white,
+                  showMoreButton: true,
+                  trendValue: cardData.appointmentChangePercent == null
+                      ? ''
+                      : '+${cardData.appointmentChangePercent} vs last week',
+                  trendPositive: true,
+                );
+              },
             ),
             const SizedBox(height: 20),
             SizedBox(

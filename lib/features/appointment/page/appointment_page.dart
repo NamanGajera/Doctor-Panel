@@ -40,7 +40,7 @@ class _AppointmentpageState extends State<Appointmentpage> {
           height: 30.0,
         ),
         const SizedBox(height: 20),
-        EnhancedDataTableWidget(),
+        const EnhancedDataTableWidget(),
         // SizedBox(
         //   width: double.infinity,
         //   child: DataTable(
@@ -117,6 +117,8 @@ class _AppointmentpageState extends State<Appointmentpage> {
 // import 'package:flutter/material.dart';
 
 class EnhancedDataTableWidget extends StatefulWidget {
+  const EnhancedDataTableWidget({super.key});
+
   @override
   _EnhancedDataTableWidgetState createState() =>
       _EnhancedDataTableWidgetState();
@@ -220,7 +222,7 @@ class _EnhancedDataTableWidgetState extends State<EnhancedDataTableWidget> {
     return Tooltip(
       message: tooltip,
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 2),
+        margin: const EdgeInsets.symmetric(horizontal: 2),
         decoration: BoxDecoration(
           color: color.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(6),
@@ -230,7 +232,7 @@ class _EnhancedDataTableWidgetState extends State<EnhancedDataTableWidget> {
           onTap: onPressed,
           borderRadius: BorderRadius.circular(6),
           child: Padding(
-            padding: EdgeInsets.all(6),
+            padding: const EdgeInsets.all(6),
             child: Icon(
               icon,
               size: 16,
@@ -254,7 +256,7 @@ class _EnhancedDataTableWidgetState extends State<EnhancedDataTableWidget> {
             color: Colors.grey.withValues(alpha: 0.1),
             spreadRadius: 1,
             blurRadius: 8,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -308,54 +310,54 @@ class _EnhancedDataTableWidgetState extends State<EnhancedDataTableWidget> {
                       label: Tooltip(
                         message: 'Available actions for each row',
                         child: Container(
-                          child: Text('Actions'),
+                          child: const Text('Actions'),
                         ),
                       ),
                     ),
                     DataColumn(
-                      label: Tooltip(
+                      label: const Tooltip(
                         message: 'Click to sort by patient name',
                         child: Text('Patient Name'),
                       ),
                       onSort: onSort,
                     ),
                     DataColumn(
-                      label: Tooltip(
+                      label: const Tooltip(
                         message: 'Click to sort by date',
                         child: Text('Date'),
                       ),
                       onSort: onSort,
                     ),
                     DataColumn(
-                      label: Tooltip(
+                      label: const Tooltip(
                         message: 'Click to sort by time',
                         child: Text('Time'),
                       ),
                       onSort: onSort,
                     ),
                     DataColumn(
-                      label: Tooltip(
+                      label: const Tooltip(
                         message: 'Click to sort by treatment type',
                         child: Text('Treatment'),
                       ),
                       onSort: onSort,
                     ),
                     DataColumn(
-                      label: Tooltip(
+                      label: const Tooltip(
                         message: 'Click to sort by appointment status',
                         child: Text('Appointment'),
                       ),
                       onSort: onSort,
                     ),
                     DataColumn(
-                      label: Tooltip(
+                      label: const Tooltip(
                         message: 'Click to sort by payment status',
                         child: Text('Payment'),
                       ),
                       onSort: onSort,
                     ),
                     DataColumn(
-                      label: Tooltip(
+                      label: const Tooltip(
                         message: 'Click to sort by duration',
                         child: Text('Duration'),
                       ),
@@ -414,7 +416,7 @@ class _EnhancedDataTableWidgetState extends State<EnhancedDataTableWidget> {
                         DataCell(Text(data['treatment'])),
                         DataCell(
                           Container(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 8, vertical: 4),
                             decoration: BoxDecoration(
                               border: Border.all(
@@ -435,7 +437,7 @@ class _EnhancedDataTableWidgetState extends State<EnhancedDataTableWidget> {
                         ),
                         DataCell(
                           Container(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 8, vertical: 4),
                             decoration: BoxDecoration(
                               border: Border.all(
