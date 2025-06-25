@@ -3,6 +3,7 @@ import 'package:doctor_panel/features/dashboard/page/widget/appointment_card.dar
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/icons.dart';
+import '../../appointment/page/widgets/appointment_data_table.dart';
 import '../models/appointment_card_data_model.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -90,35 +91,7 @@ class _DashboardPageState extends State<DashboardPage> {
               },
             ),
             const SizedBox(height: 20),
-            SizedBox(
-              width: double.infinity,
-              child: DataTable(
-                showCheckboxColumn: true,
-                columns: const [
-                  DataColumn(label: Text('Patient Name')),
-                  DataColumn(label: Text('Date')),
-                  DataColumn(label: Text('Time')),
-                  DataColumn(label: Text('Treatment')),
-                  DataColumn(label: Text('Appointment')),
-                  DataColumn(label: Text('Payment')),
-                  DataColumn(label: Text('Duration')),
-                ],
-                rows: [
-                  DataRow(
-                    onSelectChanged: (value) {},
-                    cells: const [
-                      DataCell(Text('Tttt')),
-                      DataCell(Text('Tttt')),
-                      DataCell(Text('Tttt')),
-                      DataCell(Text('Tttt')),
-                      DataCell(Text('Tttt')),
-                      DataCell(Text('Tttt')),
-                      DataCell(Text('Tttt')),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            const AppointmentDataTable(),
           ],
         ),
       ),

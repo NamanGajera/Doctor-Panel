@@ -5,7 +5,7 @@ import 'package:doctor_panel/core/constants/widgets.dart';
 import 'package:doctor_panel/core/extension/bloc_event_call_extenstion.dart';
 import 'package:doctor_panel/core/extension/build_context_extenstion.dart';
 import 'package:doctor_panel/features/mainLayout/bloc/main_layout_bloc.dart';
-import 'package:doctor_panel/routers/route_names.dart';
+import 'package:doctor_panel/routers/route_name_and_path.dart';
 import 'package:doctor_panel/routers/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,14 +21,14 @@ class SideBar extends StatefulWidget {
 
 class _SideBarState extends State<SideBar> {
   List<String> routeNames = [
-    dashboardPageName,
-    appointmentPageName,
-    patientPageName,
-    calendarPageName,
-    chatPageName,
-    prescriptionPageName,
-    helpSupportPageName,
-    settingPageName,
+    RouterName.dashboardPage.name,
+    RouterName.appointmentPage.name,
+    RouterName.patientPage.name,
+    RouterName.calendarPage.name,
+    RouterName.chatPage.name,
+    RouterName.prescriptionPage.name,
+    RouterName.helpSupportPage.name,
+    RouterName.settingPage.name,
   ];
 
   List<String> sideBarMenuIcons = [

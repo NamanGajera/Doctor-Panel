@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:doctor_panel/routers/router.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -22,13 +23,19 @@ class HelperFunctions {
     BorderRadius? bottomSheetBorderRadius,
     Color? bottomSheetBackgroundColor,
     TextStyle? optionTextStyle,
-    EdgeInsets bottomSheetPadding = const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+    EdgeInsets bottomSheetPadding =
+        const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
   }) async {
     if (source != PickerSource.both) {
-      final ImageSource imageSource = source == PickerSource.camera ? ImageSource.camera : ImageSource.gallery;
+      final ImageSource imageSource = source == PickerSource.camera
+          ? ImageSource.camera
+          : ImageSource.gallery;
 
-      if (mediaType == MediaType.image && allowMultiple && source == PickerSource.gallery) {
-        final List<XFile> pickedFiles = await _picker.pickMultiImage(imageQuality: imageQuality);
+      if (mediaType == MediaType.image &&
+          allowMultiple &&
+          source == PickerSource.gallery) {
+        final List<XFile> pickedFiles =
+            await _picker.pickMultiImage(imageQuality: imageQuality);
         if (pickedFiles.isNotEmpty) {
           return MediaPickerResponse(
             files: pickedFiles.map((file) => File(file.path)).toList(),
@@ -69,7 +76,8 @@ class HelperFunctions {
       context: context,
       backgroundColor: bottomSheetBackgroundColor,
       shape: RoundedRectangleBorder(
-        borderRadius: bottomSheetBorderRadius ?? const BorderRadius.vertical(top: Radius.circular(15)),
+        borderRadius: bottomSheetBorderRadius ??
+            const BorderRadius.vertical(top: Radius.circular(15)),
       ),
       builder: (context) => Container(
         padding: bottomSheetPadding,
@@ -95,7 +103,8 @@ class HelperFunctions {
               ),
               const Divider(),
             ],
-            if (mediaType == MediaType.image || mediaType == MediaType.both) ...[
+            if (mediaType == MediaType.image ||
+                mediaType == MediaType.both) ...[
               ListTile(
                 leading: const Icon(Icons.camera_alt),
                 title: Text(cameraLabel, style: optionTextStyle),
@@ -105,7 +114,8 @@ class HelperFunctions {
                     imageQuality: imageQuality,
                   );
                   if (pickedFile != null) {
-                    Navigator.pop(context, MediaPickerResponse(files: [File(pickedFile.path)]));
+                    Navigator.pop(context,
+                        MediaPickerResponse(files: [File(pickedFile.path)]));
                   } else {
                     Navigator.pop(context);
                   }
@@ -120,7 +130,8 @@ class HelperFunctions {
                     imageQuality: imageQuality,
                   );
                   if (pickedFile != null) {
-                    Navigator.pop(context, MediaPickerResponse(files: [File(pickedFile.path)]));
+                    Navigator.pop(context,
+                        MediaPickerResponse(files: [File(pickedFile.path)]));
                   } else {
                     Navigator.pop(context);
                   }
@@ -131,19 +142,29 @@ class HelperFunctions {
                   leading: const Icon(Icons.photo_library),
                   title: Text(multipleImagesLabel, style: optionTextStyle),
                   onTap: () async {
-                    final List<XFile> pickedFiles = await _picker.pickMultiImage(imageQuality: imageQuality);
+                    final List<XFile> pickedFiles = await _picker
+                        .pickMultiImage(imageQuality: imageQuality);
                     if (pickedFiles.isNotEmpty) {
-                      Navigator.pop(
-                        context,
-                        MediaPickerResponse(files: pickedFiles.map((file) => File(file.path)).toList()),
-                      );
+                      appRouter.pop(MediaPickerResponse(
+                          files: pickedFiles
+                              .map((file) => File(file.path))
+                              .toList()));
+                      // Navigator.pop(
+                      //   context,
+                      //   MediaPickerResponse(
+                      //       files: pickedFiles
+                      //           .map((file) => File(file.path))
+                      //           .toList()),
+                      // );
                     } else {
-                      Navigator.pop(context);
+                      appRouter.pop();
+                      // Navigator.pop(context);
                     }
                   },
                 ),
             ],
-            if (mediaType == MediaType.video || mediaType == MediaType.both) ...[
+            if (mediaType == MediaType.video ||
+                mediaType == MediaType.both) ...[
               ListTile(
                 leading: const Icon(Icons.videocam),
                 title: Text('Camera $videoLabel', style: optionTextStyle),
@@ -153,9 +174,14 @@ class HelperFunctions {
                     maxDuration: maxVideoDuration,
                   );
                   if (pickedFile != null) {
-                    Navigator.pop(context, MediaPickerResponse(files: [File(pickedFile.path)], isVideo: true));
+                    appRouter.pop(MediaPickerResponse(
+                        files: [File(pickedFile.path)], isVideo: true));
+                    // Navigator.pop(
+                    //     context,
+                    //    );
                   } else {
-                    Navigator.pop(context);
+                    appRouter.pop();
+                    // Navigator.pop(context);
                   }
                 },
               ),
@@ -168,7 +194,10 @@ class HelperFunctions {
                     maxDuration: maxVideoDuration,
                   );
                   if (pickedFile != null) {
-                    Navigator.pop(context, MediaPickerResponse(files: [File(pickedFile.path)], isVideo: true));
+                    Navigator.pop(
+                        context,
+                        MediaPickerResponse(
+                            files: [File(pickedFile.path)], isVideo: true));
                   } else {
                     Navigator.pop(context);
                   }
