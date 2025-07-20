@@ -20,209 +20,184 @@ class MainContentView extends StatefulWidget {
 
 class _MainContentViewState extends State<MainContentView> {
   final GlobalKey _popupKey = GlobalKey();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = context.screenWidth;
     final isSmallScreen = screenWidth < 1100;
 
-    // Close popup menu when screen width > 520
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (screenWidth > 520) {
-        // Close popup menu if it's open
         Navigator.of(context, rootNavigator: true).popUntil((route) {
           return route.isFirst || !route.willHandlePopInternally;
         });
       }
     });
 
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            if (isSmallScreen)
-              const Icon(Icons.menu)
-                  .withPadding(const EdgeInsets.only(left: 20))
-                  .onTap(() {
-                mainLayoutScaffodKey.currentState?.openDrawer();
-              }),
-            const Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+    return Container(
+      color: Colors.grey.shade200,
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // if (screenWidth > 520) ...[
-                //   Tooltip(
-                //     message: 'Chat',
-                //     child: CustomIconContainer(
-                //       iconPath: AppIcons.chatIcon,
-                //       backgroundColor: Colors.white,
-                //       borderRadius: 40,
-                //       isSvg: true,
-                //       borderColor: Colors.grey.shade300,
-                //       height: 18,
-                //       width: 18,
-                //       padding: 8,
-                //     ),
-                //   ),
-                //   const SizedBox(width: 15),
-                //   Tooltip(
-                //     message: 'Notification',
-                //     child: CustomIconContainer(
-                //       iconPath: AppIcons.notificationIcon,
-                //       backgroundColor: Colors.white,
-                //       borderRadius: 40,
-                //       isSvg: true,
-                //       borderColor: Colors.grey.shade300,
-                //       height: 18,
-                //       width: 18,
-                //       padding: 8,
-                //     ),
-                //   ),
-                //   const SizedBox(width: 15),
-                //   Tooltip(
-                //     message: 'Setting',
-                //     child: CustomIconContainer(
-                //       iconPath: AppIcons.settingIcon,
-                //       backgroundColor: Colors.white,
-                //       borderRadius: 40,
-                //       isSvg: true,
-                //       borderColor: Colors.grey.shade300,
-                //       height: 18,
-                //       width: 18,
-                //       padding: 8,
-                //     ),
-                //   ),
-                // ],
-                // const SizedBox(width: 30),
-
-                PopupMenuButton(
-                  key: _popupKey,
-                  offset: const Offset(-20, 45),
-                  color: Colors.white,
-                  elevation: 8,
-                  borderRadius: BorderRadius.circular(16),
-                  menuPadding: const EdgeInsets.all(8),
-                  icon: Container(
-                    decoration: BoxDecoration(
+                if (isSmallScreen)
+                  const Icon(Icons.menu)
+                      .withPadding(const EdgeInsets.only(left: 20))
+                      .onTap(() {
+                    mainLayoutScaffodKey.currentState?.openDrawer();
+                  }),
+                const Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    PopupMenuButton(
+                      key: _popupKey,
+                      offset: const Offset(-20, 45),
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(40),
-                      border:
-                          Border.all(color: Colors.grey.shade200, width: 1.5),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.08),
-                          blurRadius: 8,
-                          offset: const Offset(0, 2),
+                      elevation: 8,
+                      borderRadius: BorderRadius.circular(16),
+                      menuPadding: const EdgeInsets.all(8),
+                      icon: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(40),
+                          border: Border.all(
+                              color: Colors.grey.shade200, width: 1.5),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.08),
+                              blurRadius: 8,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: const CustomIconContainer(
+                          iconPath: AppImages.doctorProfile,
+                          backgroundColor: Colors.transparent,
+                          borderRadius: 40,
+                          padding: 0,
+                          height: 30,
+                          width: 30,
+                        ),
+                      ),
+                      itemBuilder: (context) => [
+                        // Chat Option
+                        PopupMenuItem(
+                          padding: EdgeInsets.zero,
+                          child: ModernMenuItem(
+                            icon: Icons.chat_bubble_outline_rounded,
+                            title: 'Messages',
+                            subtitle: '3 unread',
+                            onTap: () {
+                              Navigator.pop(context);
+                              // Handle chat navigation
+                            },
+                          ),
+                        ),
+
+                        // Notification Option
+                        PopupMenuItem(
+                          padding: EdgeInsets.zero,
+                          child: ModernMenuItem(
+                            icon: Icons.notifications_outlined,
+                            title: 'Notifications',
+                            subtitle: '5 new alerts',
+                            badge: true,
+                            onTap: () {
+                              Navigator.pop(context);
+                              // Handle notification navigation
+                            },
+                          ),
+                        ),
+
+                        // Settings Option
+                        PopupMenuItem(
+                          padding: EdgeInsets.zero,
+                          child: ModernMenuItem(
+                            icon: Icons.settings_outlined,
+                            title: 'Settings',
+                            subtitle: 'Manage account',
+                            onTap: () {
+                              Navigator.pop(context);
+                              // Handle settings navigation
+                            },
+                          ),
+                        ),
+
+                        // Divider
+                        PopupMenuItem(
+                          enabled: false,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 4),
+                          child: Divider(
+                            color: Colors.grey.shade200,
+                            thickness: 1,
+                            height: 1,
+                          ),
+                        ),
+
+                        // Logout Option
+                        PopupMenuItem(
+                          padding: EdgeInsets.zero,
+                          child: ModernMenuItem(
+                            icon: Icons.logout_rounded,
+                            title: 'Sign Out',
+                            subtitle: 'Logout securely',
+                            isLogout: true,
+                            onTap: () {
+                              Navigator.pop(context);
+                              // Handle logout
+                            },
+                          ),
                         ),
                       ],
                     ),
-                    child: const CustomIconContainer(
-                      iconPath: AppImages.doctorProfile,
-                      backgroundColor: Colors.transparent,
-                      borderRadius: 40,
-                      padding: 0,
-                      height: 40,
-                      width: 40,
-                    ),
-                  ),
-                  itemBuilder: (context) => [
-                    // Chat Option
-                    PopupMenuItem(
-                      padding: EdgeInsets.zero,
-                      child: ModernMenuItem(
-                        icon: Icons.chat_bubble_outline_rounded,
-                        title: 'Messages',
-                        subtitle: '3 unread',
-                        onTap: () {
-                          Navigator.pop(context);
-                          // Handle chat navigation
-                        },
+                    if (screenWidth > 520) const SizedBox(width: 6),
+                    if (screenWidth > 520)
+                      const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomText(
+                            'Naman Gajera',
+                            fontSize: 12,
+                            height: 0,
+                          ),
+                          CustomText(
+                            'Dentist',
+                            fontSize: 10,
+                          ),
+                        ],
                       ),
-                    ),
-
-                    // Notification Option
-                    PopupMenuItem(
-                      padding: EdgeInsets.zero,
-                      child: ModernMenuItem(
-                        icon: Icons.notifications_outlined,
-                        title: 'Notifications',
-                        subtitle: '5 new alerts',
-                        badge: true,
-                        onTap: () {
-                          Navigator.pop(context);
-                          // Handle notification navigation
-                        },
-                      ),
-                    ),
-
-                    // Settings Option
-                    PopupMenuItem(
-                      padding: EdgeInsets.zero,
-                      child: ModernMenuItem(
-                        icon: Icons.settings_outlined,
-                        title: 'Settings',
-                        subtitle: 'Manage account',
-                        onTap: () {
-                          Navigator.pop(context);
-                          // Handle settings navigation
-                        },
-                      ),
-                    ),
-
-                    // Divider
-                    PopupMenuItem(
-                      enabled: false,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 4),
-                      child: Divider(
-                        color: Colors.grey.shade200,
-                        thickness: 1,
-                        height: 1,
-                      ),
-                    ),
-
-                    // Logout Option
-                    PopupMenuItem(
-                      padding: EdgeInsets.zero,
-                      child: ModernMenuItem(
-                        icon: Icons.logout_rounded,
-                        title: 'Sign Out',
-                        subtitle: 'Logout securely',
-                        isLogout: true,
-                        onTap: () {
-                          Navigator.pop(context);
-                          // Handle logout
-                        },
-                      ),
-                    ),
+                    const SizedBox(width: 30),
                   ],
                 ),
-                if (screenWidth > 520) const SizedBox(width: 6),
-                if (screenWidth > 520)
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomText(
-                        'Naman Gajera',
-                        fontSize: 12,
-                        height: 0,
-                      ),
-                      CustomText(
-                        'Dentist',
-                        fontSize: 10,
-                      ),
-                    ],
-                  ),
-                const SizedBox(width: 30),
               ],
+            ).withPadding(const EdgeInsets.symmetric(vertical: 10)),
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              controller: _scrollController,
+              child: Container(
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: widget.child,
+              ),
             ),
-          ],
-        ).withPadding(const EdgeInsets.symmetric(vertical: 10)),
-        Expanded(
-          child: widget.child,
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 }

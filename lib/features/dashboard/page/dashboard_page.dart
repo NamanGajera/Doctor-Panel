@@ -52,48 +52,46 @@ class _DashboardPageState extends State<DashboardPage> {
   ];
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: context.screenWidth < 370
-                    ? 1
-                    : context.screenWidth < 760
-                        ? 2
-                        : 4,
-                mainAxisExtent: 170,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-              ),
-              itemCount: appointmentCardData.length,
-              itemBuilder: (context, index) {
-                final AppointmentCardDataModel cardData =
-                    appointmentCardData[index];
-                return AppointmentCard(
-                  title: cardData.title ?? '-',
-                  subtitle: cardData.subTitle ?? '-',
-                  value: '${cardData.appointmentCount ?? 0}',
-                  iconPath: cardData.iconPath ?? '-',
-                  iconBackgroundColor: Colors.white,
-                  cardColor: cardData.cardColor ?? Colors.white,
-                  showMoreButton: true,
-                  trendValue: cardData.appointmentChangePercent == null
-                      ? ''
-                      : '+${cardData.appointmentChangePercent} vs last week',
-                  trendPositive: true,
-                );
-              },
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: context.screenWidth < 370
+                  ? 1
+                  : context.screenWidth < 760
+                      ? 2
+                      : 4,
+              mainAxisExtent: 170,
+              crossAxisSpacing: 16,
+              mainAxisSpacing: 16,
             ),
-            const SizedBox(height: 20),
-            const AppointmentDataTable(),
-          ],
-        ),
+            itemCount: appointmentCardData.length,
+            itemBuilder: (context, index) {
+              final AppointmentCardDataModel cardData =
+                  appointmentCardData[index];
+              return AppointmentCard(
+                title: cardData.title ?? '-',
+                subtitle: cardData.subTitle ?? '-',
+                value: '${cardData.appointmentCount ?? 0}',
+                iconPath: cardData.iconPath ?? '-',
+                iconBackgroundColor: Colors.white,
+                cardColor: cardData.cardColor ?? Colors.white,
+                showMoreButton: true,
+                trendValue: cardData.appointmentChangePercent == null
+                    ? ''
+                    : '+${cardData.appointmentChangePercent} vs last week',
+                trendPositive: true,
+              );
+            },
+          ),
+          const SizedBox(height: 20),
+          const AppointmentDataTable(),
+        ],
       ),
     );
   }

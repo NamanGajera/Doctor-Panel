@@ -1,4 +1,5 @@
 import 'package:doctor_panel/core/constants/colors.dart';
+import 'package:doctor_panel/core/constants/widgets.dart';
 import 'package:doctor_panel/features/profile/bloc/profile_screen_bloc.dart';
 import 'package:doctor_panel/features/profile/page/widgets/education_info_form.dart';
 import 'package:doctor_panel/features/profile/page/widgets/experience_info_form.dart';
@@ -48,22 +49,6 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
 
         return Scaffold(
           backgroundColor: Colors.grey[50],
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            elevation: 0,
-            title: const Text(
-              'Doctor Profile Setup',
-              style: TextStyle(
-                color: primaryDarkBlueColor,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            centerTitle: true,
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: primaryDarkBlueColor),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-          ),
           body: BlocConsumer<ProfileScreenBloc, ProfileScreenState>(
             listener: (context, state) {
               _pageController.animateToPage(
@@ -75,7 +60,6 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
             builder: (context, state) {
               return Column(
                 children: [
-                  // Side tabs for desktop view, top tabs for mobile
                   if (isDesktop)
                     _buildDesktopLayout(state, context)
                   else
@@ -320,20 +304,23 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                 ),
               ),
               AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
-                height: 6,
-                width: MediaQuery.of(context).size.width * progress - 48,
+                duration: const Duration(milliseconds: 400),
+                curve: Curves.easeInOut,
+                height: 8,
+                width: (MediaQuery.of(context).size.width - 48) * progress,
                 decoration: BoxDecoration(
                   color: progress == 1.0 ? Colors.green : primaryDarkBlueColor,
-                  borderRadius: BorderRadius.circular(3),
-                  gradient: LinearGradient(
-                    colors: [
-                      primaryDarkBlueColor,
-                      progress == 1.0
-                          ? Colors.green
-                          : primaryDarkBlueColor.withValues(alpha: 0.7),
-                    ],
-                  ),
+                  borderRadius: BorderRadius.circular(4),
+                  boxShadow: [
+                    BoxShadow(
+                      color: (progress == 1.0
+                              ? Colors.green
+                              : primaryDarkBlueColor)
+                          .withValues(alpha: 0.3),
+                      blurRadius: 4,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -420,12 +407,16 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                 _showCompletionDialog(context);
               }
             },
-            icon: Icon(state.stepIndex < _steps.length - 1
-                ? Icons.arrow_forward
-                : Icons.check),
-            label: Text(state.stepIndex < _steps.length - 1
-                ? 'Continue'
-                : 'Submit Profile'),
+            icon: Icon(
+              state.stepIndex < _steps.length - 1
+                  ? Icons.arrow_forward
+                  : Icons.check,
+              color: Colors.white,
+            ),
+            label: CustomText(
+              state.stepIndex < _steps.length - 1 ? 'Continue' : 'Submit',
+              color: Colors.white,
+            ),
             style: ElevatedButton.styleFrom(
               backgroundColor: state.stepIndex < _steps.length - 1
                   ? primaryDarkBlueColor

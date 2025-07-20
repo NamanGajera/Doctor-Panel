@@ -116,7 +116,7 @@ class _LoginFormState extends State<LoginForm> {
         CustomButton(
           label: 'Login',
           onPressed: () {
-            appRouter.goNamed(RouterName.dashboardPage.name);
+            appRouter.goNamed(RouterName.completeProfile.name);
           },
           color: Colors.black,
           textColor: Colors.white,

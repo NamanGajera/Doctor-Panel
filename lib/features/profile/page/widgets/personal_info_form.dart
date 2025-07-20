@@ -30,10 +30,7 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
   bool get hasProfileImage => _profileImage != null;
   String _selectedGender = 'Male';
 
-  void _pickImage() async {
-    // Image picking implementation to be added
-    // The actual implementation would depend on web-specific packages
-  }
+  void _pickImage() async {}
 
   void _calculateAge() {
     if (_birthDateController.text.isNotEmpty) {
@@ -271,57 +268,20 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
               ),
             ],
           ),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              // Profile Image or Placeholder
-              hasProfileImage
-                  ? ClipOval(
-                      child: Image.file(
-                        _profileImage!,
-                        width: 180,
-                        height: 180,
-                        fit: BoxFit.cover,
-                      ),
-                    )
-                  : Icon(
-                      Icons.person,
-                      size: 80,
-                      color: Colors.grey.shade400,
-                    ),
-
-              // Camera Button Overlay
-              Positioned(
-                bottom: 0,
-                right: 10,
-                child: Material(
-                  elevation: 4,
-                  shape: const CircleBorder(),
-                  clipBehavior: Clip.hardEdge,
-                  color: primaryBlueColor,
-                  child: InkWell(
-                    onTap: _pickImage,
-                    child: Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: LinearGradient(
-                          colors: [primaryBlueColor, primaryDarkBlueColor],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                      ),
-                      child: const Icon(
-                        Icons.camera_alt,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                    ),
+          child: hasProfileImage
+              ? ClipOval(
+                  child: Image.file(
+                    _profileImage!,
+                    width: 180,
+                    height: 180,
+                    fit: BoxFit.cover,
                   ),
+                )
+              : Icon(
+                  Icons.person,
+                  size: 80,
+                  color: Colors.grey.shade400,
                 ),
-              ),
-            ],
-          ),
         ),
         const SizedBox(height: 16),
         TextButton.icon(
